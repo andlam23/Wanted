@@ -1,58 +1,68 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-public class CharacterMovementBouncy : MonoBehaviour
+public class CharacterMovementBouncy : CharacterMovement
 {
-    // set character X and Y position values
-    protected float characterXValue;
-    protected float characterYValue;
-    // set character speed for X and Y
-    public Vector2 characterSpeed;
-    // set boundaries for the game area
-    protected float xBoundary = 8.5f;
-    protected float yBoundary = 4.5f;
-    // define waviness frequency and amplitude
-    protected float frequency;
-    protected float amplitude;
+    // define bounce
+    private float bounce;
     void Start()
     {
-        // set random character speed
-        characterSpeed = new Vector2(Random.Range(1.0f, 4.0f) * (Random.Range(0, 2) * 2 - 1), Random.Range(1.0f, 4.0f) * (Random.Range(0, 2) * 2 - 1));
-        // getting the initial position where prefab is created
-        characterXValue = gameObject.transform.position.x;
-        characterYValue = gameObject.transform.position.y;
+        // set bounce amount
+        bounce = 0.1f;
+        // set actual boundaries for game area
+        xBoundary = 8.5f;
+        yBoundary = 4.5f;
+        SetRandomCharacterSpeed();
+        GetPrefabStartPosition();
     }
     void Update()
     {
-        // adding speed value over time to the X and Y axis position value
-        characterXValue += characterSpeed.x * Time.deltaTime;
-        characterYValue += characterSpeed.y * Time.deltaTime;
-        // setting new X and Y value to position
-        gameObject.transform.position = new Vector2(characterXValue, characterYValue);
-        // making character bounce off boundaries
+        CalculateNewPosition();
+        SetNewPosition();
+        BounceOffGameArea();
+    }
+    void SetRandomCharacterSpeed()
+    {
+        // set random character speed
+        characterSpeed = new Vector2(Random.Range(1.0f, 4.0f) * (Random.Range(0, 2) * 2 - 1), Random.Range(1.0f, 4.0f) * (Random.Range(0, 2) * 2 - 1));
+    }
+   void BounceOffGameArea()
+   {
+        // making character bounce off right side boundary and make it go left
         if (gameObject.transform.position.x >= xBoundary)
         {
-            characterSpeed.x = -characterSpeed.x;
-            characterXValue = characterXValue - 0.1f;
-            gameObject.transform.position = new Vector2(characterXValue, characterYValue);
+            ReverseXDirection();
+            characterXValue = characterXValue - bounce;
+            SetNewPosition();
         }
+        // making character bounce off top side boundary and make it go down
         else if (gameObject.transform.position.y >= yBoundary)
         {
-            characterSpeed.y = -characterSpeed.y;
-            characterYValue = characterYValue - 0.1f;
-            gameObject.transform.position = new Vector2(characterXValue, characterYValue);
+            ReverseYDirection();
+            characterYValue = characterYValue - bounce;
+            SetNewPosition();
         }
+        // making character bounce off left side boundary and make it go right
         else if (gameObject.transform.position.x <= -xBoundary)
         {
-            characterSpeed.x = -characterSpeed.x;
-            characterXValue = characterXValue + 0.1f;
-            gameObject.transform.position = new Vector2(characterXValue, characterYValue);
+            ReverseXDirection();
+            characterXValue = characterXValue + bounce;
+            SetNewPosition();
         }
+        // making character bounce off bottom side boundary and make it go up
         else if (gameObject.transform.position.y <= -yBoundary)
         {
-            characterSpeed.y = -characterSpeed.y;
-            characterYValue = characterYValue + 0.1f;
-            gameObject.transform.position = new Vector2(characterXValue, characterYValue);
+            ReverseYDirection();
+            characterYValue = characterYValue + bounce;
+            SetNewPosition();
         }
-    }
+   }
+   void ReverseXDirection()
+   {
+        // reversing the x direction of the character
+        characterSpeed.x = reverse * characterSpeed.x;
+   }
+   void ReverseYDirection()
+   {
+        // reversing the y direction of the character
+        characterSpeed.y = reverse * characterSpeed.y;
+   }    
 }
