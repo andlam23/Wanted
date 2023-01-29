@@ -62,7 +62,7 @@ public class NonMovingCode : MonoBehaviour
     }
     protected void CreateWrongCharacters()
     {
-        //Selecting a random wrong character and random spawn position with a random offset, then instantiating it
+        //Selecting a random wrong character and random spawn position with a random offset, then instantiating it, and setting it to a random non-bottom layer
         for (int i = 0; i < numberWrongCharacters; i++)
         {
             int wrongCharacterIndex = Random.Range(firstCharacterPrefab, characterPrefabs.Count);
@@ -71,8 +71,9 @@ public class NonMovingCode : MonoBehaviour
             Vector2 wrongSpawnPosition = grid[gridIndex] + randomOffset;
             GameObject wrongCharacter = (GameObject)Instantiate(characterPrefabs[wrongCharacterIndex], wrongSpawnPosition, Quaternion.identity);
             Renderer wrongCharacterRenderer = wrongCharacter.GetComponent<Renderer>();
+            int firstUniqueWrongCharacter = 0;
             int numberUniqueWrongCharacters = 3;
-            int randomSortingOrder = Random.Range(0, numberUniqueWrongCharacters);
+            int randomSortingOrder = Random.Range(firstUniqueWrongCharacter, numberUniqueWrongCharacters);
             wrongCharacterRenderer.sortingOrder = randomSortingOrder;
             //Removing the Vector2 from the grid list
             grid.RemoveAt(gridIndex);

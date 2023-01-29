@@ -67,7 +67,7 @@ public class MovingCodeWavy : MonoBehaviour
     }
     protected void CreateWrongCharacters()
     {
-        //Selecting a random wrong character and random spawn position with a random offset, then instantiating it
+        //Selecting a random wrong character and random spawn position with a random offset, then instantiating it, and setting it to a random non-bottom layer
         for (int i = 0; i < numberWrongCharacters; i++)
         {
             int wrongCharacterIndex = Random.Range(0, characterPrefabs.Count);
@@ -80,6 +80,11 @@ public class MovingCodeWavy : MonoBehaviour
             //Getting the character movement class from the instantiated wrong character and setting its speed to the predetermined character speed
             CharacterMovement wrongCharacterMovement = wrongCharacter.GetComponent<CharacterMovement>();
             wrongCharacterMovement.characterSpeed = characterSpeeds[wrongCharacterIndex];
+            Renderer wrongCharacterRenderer = wrongCharacter.GetComponent<Renderer>();
+            int firstUniqueWrongCharacter = 0;
+            int numberUniqueWrongCharacters = 3;
+            int randomSortingOrder = Random.Range(firstUniqueWrongCharacter, numberUniqueWrongCharacters);
+            wrongCharacterRenderer.sortingOrder = randomSortingOrder;
             //Removing the Vector2 from the grid list
             grid.RemoveAt(gridIndex);
         }
