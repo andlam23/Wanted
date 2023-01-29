@@ -3,12 +3,10 @@ using UnityEngine;
 public class Level2NonMovingCode : Level1NonMovingCode
 {
     //Character spawn area
-    protected new float spawnRangeX;
-    protected new float spawnRangeY;
+    protected new float spawnRangeX = 1.5f;
+    protected new float spawnRangeY = 1.5f;
     void Start()
     {
-        spawnRangeX = 1.5f;
-        spawnRangeY = 1.5f;
         CreateCharactersOnGrid();
     }
     protected new void CreateGrid()
