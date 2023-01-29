@@ -17,6 +17,8 @@ public class CharacterMovement : MonoBehaviour
     protected int reverse = -1;
     // define a space buffer
     protected float buffer = 0.1f;
+    // define not moving
+    protected int notMoving = 0;
     void Start()
     {
         // set actual boundaries for game area
@@ -63,15 +65,15 @@ public class CharacterMovement : MonoBehaviour
     void CalculateNewPositionAndWaviness()
     {
         // adding waviness to the movement if x or y of characterSpeed is 0, and no waviness if neither is 0, then determine new X and Y values
-        if (characterSpeed.x != 0 && characterSpeed.y != 0)
+        if (characterSpeed.x != notMoving && characterSpeed.y != notMoving)
         {
             CalculateNewPosition();
         }
-        else if (characterSpeed.x == 0 && characterSpeed.y != 0)
+        else if (characterSpeed.x == notMoving && characterSpeed.y != notMoving)
         {
             CalculateYPositionAndHorizontalWaviness();
         }
-        else if (characterSpeed.y == 0 && characterSpeed.x != 0)
+        else if (characterSpeed.y == notMoving && characterSpeed.x != notMoving)
         {
             CalculateXPositionAndVerticalWaviness();
         }

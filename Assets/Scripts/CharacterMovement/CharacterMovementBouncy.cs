@@ -22,7 +22,11 @@ public class CharacterMovementBouncy : CharacterMovement
     void SetRandomCharacterSpeed()
     {
         // set random character speed
-        characterSpeed = new Vector2(Random.Range(1.0f, 4.0f) * (Random.Range(0, 2) * 2 - 1), Random.Range(1.0f, 4.0f) * (Random.Range(0, 2) * 2 - 1));
+        float randomXValue = Random.Range(1.0f, 4.0f);
+        int positiveOrNegativeXValue = Random.Range(0, 2) * 2 - 1;
+        float randomYValue = Random.Range(1.0f, 4.0f);
+        int positiveOrNegativeYValue = Random.Range(0, 2) * 2 - 1;
+        characterSpeed = new Vector2(randomXValue * positiveOrNegativeXValue, randomYValue * positiveOrNegativeYValue);
     }
    void BounceOffGameArea()
    {

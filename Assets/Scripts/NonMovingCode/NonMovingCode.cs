@@ -1,31 +1,40 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class NonMovingCode : MonoBehaviour
 {
     //Define a list of characters
     public List<GameObject> characterPrefabs;
+    //Define first character prefab
+    protected int firstCharacterPrefab;
     //Define a list of Vector2's to create a grid
     public List<Vector2> grid;
+    //Define first grid index
+    protected int firstGridIndex = 0;
     //Character spawn area
-    protected int spawnRangeX = 8;
-    protected int spawnRangeY = 4;
+    protected int spawnRangeX;
+    protected int spawnRangeY;
     //Number of wrong characters to instantiate
     protected int numberWrongCharacters;
-
-    //REUSEABLE: Define a Wanted character gameobject
+    //Define no offset for a character's position
+    protected float noOffset = 0;
+    //Define random X and Y offset for a character's position
+    protected float randomOffsetX = 0.3f;
+    protected float randomOffsetY = 0.3f;
+    //Define a Wanted character gameobject
     public GameObject wantedCharacterImage;
-
     void Start()
     {
+        spawnRangeX = 8;
+        spawnRangeY = 4;
         CreateCharactersOnGrid();
     }
     protected void CreateGrid()
     {
+        int includePositiveSpawnRange = 1;
         //Creating a grid of Vector2's from -8,-4 to 8,4 and adding it to the grid list
-        for (int i = -spawnRangeX; i < spawnRangeX + 1; i++)
+        for (int i = -spawnRangeX; i < spawnRangeX + includePositiveSpawnRange; i++)
         {
-            for (int j = -spawnRangeY; j < spawnRangeY + 1; j++)
+            for (int j = -spawnRangeY; j < spawnRangeY + includePositiveSpawnRange; j++)
             {
                 Vector2 gridVector2 = new Vector2(i, j);
                 grid.Add(gridVector2);
@@ -35,21 +44,19 @@ public class NonMovingCode : MonoBehaviour
     protected void CreateRightCharacter()
     {
         //Selecting a random right character and random spawn position with a random offset, instantiating it, and setting it to the bottom layer
-        int rightCharacterIndex = Random.Range(0, characterPrefabs.Count);
-
-        //REUSABLE: Setting the right character index as the Wanted character index
+        int rightCharacterIndex = Random.Range(firstCharacterPrefab, characterPrefabs.Count);
+        //Setting the right character index as the Wanted character index
         WantedCharacter wantedCharacter = wantedCharacterImage.GetComponent<WantedCharacter>();
         wantedCharacter.wantedCharacterIndex = rightCharacterIndex;
         StartCoroutine(wantedCharacter.SetWantedCharacter());
-
-        int gridIndex = Random.Range(0, grid.Count);
-        float randomOffsetX = 0.3f;
-        float randomOffsetY = 0.3f;
-        Vector2 randomOffset = new Vector2(Random.Range(0, randomOffsetX), Random.Range(0, randomOffsetY));
+        //
+        int gridIndex = Random.Range(firstGridIndex, grid.Count);
+        Vector2 randomOffset = new Vector2(Random.Range(noOffset, randomOffsetX), Random.Range(noOffset, randomOffsetY));
         Vector2 rightSpawnPosition = grid[gridIndex] + randomOffset;
         GameObject rightCharacter = (GameObject)Instantiate(characterPrefabs[rightCharacterIndex], rightSpawnPosition, Quaternion.identity);
         Renderer rightCharacterRenderer = rightCharacter.GetComponent<Renderer>();
-        rightCharacterRenderer.sortingOrder = -1;
+        int behindOtherCharacters = -1;
+        rightCharacterRenderer.sortingOrder = behindOtherCharacters;
         //Removing the right character from the list of characters
         characterPrefabs.RemoveAt(rightCharacterIndex);
         //Removing the Vector2 from the grid list
@@ -60,11 +67,9 @@ public class NonMovingCode : MonoBehaviour
         //Selecting a random wrong character and random spawn position with a random offset, then instantiating it
         for (int i = 0; i < numberWrongCharacters; i++)
         {
-            int wrongCharacterIndex = Random.Range(0, characterPrefabs.Count);
-            int gridIndex = Random.Range(0, grid.Count);
-            float randomOffsetX = 0.3f;
-            float randomOffsetY = 0.3f;
-            Vector2 randomOffset = new Vector2(Random.Range(0, randomOffsetX), Random.Range(0, randomOffsetY));
+            int wrongCharacterIndex = Random.Range(firstCharacterPrefab, characterPrefabs.Count);
+            int gridIndex = Random.Range(firstGridIndex, grid.Count);
+            Vector2 randomOffset = new Vector2(Random.Range(noOffset, randomOffsetX), Random.Range(noOffset, randomOffsetY));
             Vector2 wrongSpawnPosition = grid[gridIndex] + randomOffset;
             Instantiate(characterPrefabs[wrongCharacterIndex], wrongSpawnPosition, Quaternion.identity);
             //Removing the Vector2 from the grid list
@@ -75,8 +80,14 @@ public class NonMovingCode : MonoBehaviour
     {
         CreateGrid();
         CreateRightCharacter();
+        int positiveAndNegativeRange = 2;
+        int zeroRange = 1;
+        int numberRightCharacters = 1;
+        int maxNumberWrongCharacters = ((spawnRangeX * positiveAndNegativeRange) + zeroRange) * ((spawnRangeY * positiveAndNegativeRange) + zeroRange) - numberRightCharacters;
+        int minNumberWrongCharacters = 140;
+        int overload = 1;
         //Randomizing how many wrong characters to instantiate
-        numberWrongCharacters = Random.Range(140, 152 + 1);
+        numberWrongCharacters = Random.Range(minNumberWrongCharacters, maxNumberWrongCharacters + overload);
         CreateWrongCharacters();
     }
 }

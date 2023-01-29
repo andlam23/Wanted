@@ -366,10 +366,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wantedCharacterIndex: 0
   characters:
-  - {fileID: 21300000, guid: ecff68b27641d104ab1dc839c47eb31e, type: 3}
-  - {fileID: 21300000, guid: c03dffdf247cc604d9c091c4d23c6951, type: 3}
-  - {fileID: 21300000, guid: 1ecaa8e9a2acce44890de9c7466ced61, type: 3}
-  - {fileID: 21300000, guid: 4d4ad87c8c7df4941b30fe4385eae38c, type: 3}
+  - {fileID: 21300000, guid: a9be9b662b8f66f4d8940f3678ac194c, type: 3}
+  - {fileID: 21300000, guid: 492e64cb680766a4781869acda2641ad, type: 3}
+  - {fileID: 21300000, guid: 508471b0ad46448468f5b667c54c9fef, type: 3}
+  - {fileID: 21300000, guid: a351ff2127665ef4fa7fcd8fd2115f3b, type: 3}
   image: {fileID: 0}
 --- !u!1 &1836292991
 GameObject:
@@ -407,10 +407,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs:
-  - {fileID: 8124170519898579180, guid: a5f8f3cb7291e9d4f9191afb4f9a47a8, type: 3}
-  - {fileID: 7117952796225937070, guid: 3c37f4cd8bdc2a2448e9ae2a1b68cc71, type: 3}
-  - {fileID: 8254123071006964455, guid: 3632ca3b17011174883bb2c5afa87ee7, type: 3}
-  - {fileID: 6229044645343137133, guid: 9566f294f82f28442bb461c0784a0378, type: 3}
+  - {fileID: 8438278854340025298, guid: 8d2241ed4589cf449843f2f1d18bf0a9, type: 3}
+  - {fileID: 1316172224053426867, guid: 63af72136cda12046b4b1e1e1de4be88, type: 3}
+  - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
+  - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
   wantedCharacterImage: {fileID: 1300329254}
 --- !u!4 &1836292993
@@ -441,10 +441,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs:
-  - {fileID: 8124170519898579180, guid: a5f8f3cb7291e9d4f9191afb4f9a47a8, type: 3}
-  - {fileID: 7117952796225937070, guid: 3c37f4cd8bdc2a2448e9ae2a1b68cc71, type: 3}
-  - {fileID: 8254123071006964455, guid: 3632ca3b17011174883bb2c5afa87ee7, type: 3}
-  - {fileID: 6229044645343137133, guid: 9566f294f82f28442bb461c0784a0378, type: 3}
+  - {fileID: 8438278854340025298, guid: 8d2241ed4589cf449843f2f1d18bf0a9, type: 3}
+  - {fileID: 1316172224053426867, guid: 63af72136cda12046b4b1e1e1de4be88, type: 3}
+  - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
+  - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
   characterSpeeds: []
   wantedCharacterImage: {fileID: 1300329254}
@@ -461,10 +461,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs:
-  - {fileID: 8124170519898579180, guid: a5f8f3cb7291e9d4f9191afb4f9a47a8, type: 3}
-  - {fileID: 7117952796225937070, guid: 3c37f4cd8bdc2a2448e9ae2a1b68cc71, type: 3}
-  - {fileID: 8254123071006964455, guid: 3632ca3b17011174883bb2c5afa87ee7, type: 3}
-  - {fileID: 6229044645343137133, guid: 9566f294f82f28442bb461c0784a0378, type: 3}
+  - {fileID: 8438278854340025298, guid: 8d2241ed4589cf449843f2f1d18bf0a9, type: 3}
+  - {fileID: 1316172224053426867, guid: 63af72136cda12046b4b1e1e1de4be88, type: 3}
+  - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
+  - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
   characterSpeeds: []
   possibleCharacterSpeeds: []
@@ -482,10 +482,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs:
-  - {fileID: 8124170519898579180, guid: a5f8f3cb7291e9d4f9191afb4f9a47a8, type: 3}
-  - {fileID: 7117952796225937070, guid: 3c37f4cd8bdc2a2448e9ae2a1b68cc71, type: 3}
-  - {fileID: 8254123071006964455, guid: 3632ca3b17011174883bb2c5afa87ee7, type: 3}
-  - {fileID: 6229044645343137133, guid: 9566f294f82f28442bb461c0784a0378, type: 3}
+  - {fileID: 8438278854340025298, guid: 8d2241ed4589cf449843f2f1d18bf0a9, type: 3}
+  - {fileID: 1316172224053426867, guid: 63af72136cda12046b4b1e1e1de4be88, type: 3}
+  - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
+  - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
   wantedCharacterImage: {fileID: 1300329254}
 --- !u!114 &1836292997
@@ -501,10 +501,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs:
-  - {fileID: 8124170519898579180, guid: a5f8f3cb7291e9d4f9191afb4f9a47a8, type: 3}
-  - {fileID: 7117952796225937070, guid: 3c37f4cd8bdc2a2448e9ae2a1b68cc71, type: 3}
-  - {fileID: 8254123071006964455, guid: 3632ca3b17011174883bb2c5afa87ee7, type: 3}
-  - {fileID: 6229044645343137133, guid: 9566f294f82f28442bb461c0784a0378, type: 3}
+  - {fileID: 8438278854340025298, guid: 8d2241ed4589cf449843f2f1d18bf0a9, type: 3}
+  - {fileID: 1316172224053426867, guid: 63af72136cda12046b4b1e1e1de4be88, type: 3}
+  - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
+  - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
   wantedCharacterImage: {fileID: 1300329254}
 --- !u!114 &1836292998
@@ -514,16 +514,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836292991}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8718eebfe4b6154683a494301bcfecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs:
-  - {fileID: 8124170519898579180, guid: a5f8f3cb7291e9d4f9191afb4f9a47a8, type: 3}
-  - {fileID: 7117952796225937070, guid: 3c37f4cd8bdc2a2448e9ae2a1b68cc71, type: 3}
-  - {fileID: 8254123071006964455, guid: 3632ca3b17011174883bb2c5afa87ee7, type: 3}
-  - {fileID: 6229044645343137133, guid: 9566f294f82f28442bb461c0784a0378, type: 3}
+  - {fileID: 8438278854340025298, guid: 8d2241ed4589cf449843f2f1d18bf0a9, type: 3}
+  - {fileID: 1316172224053426867, guid: 63af72136cda12046b4b1e1e1de4be88, type: 3}
+  - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
+  - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
   wantedCharacterImage: {fileID: 1300329254}
 --- !u!114 &1836292999
@@ -539,10 +539,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs:
-  - {fileID: 8124170519898579180, guid: a5f8f3cb7291e9d4f9191afb4f9a47a8, type: 3}
-  - {fileID: 7117952796225937070, guid: 3c37f4cd8bdc2a2448e9ae2a1b68cc71, type: 3}
-  - {fileID: 8254123071006964455, guid: 3632ca3b17011174883bb2c5afa87ee7, type: 3}
-  - {fileID: 6229044645343137133, guid: 9566f294f82f28442bb461c0784a0378, type: 3}
+  - {fileID: 8438278854340025298, guid: 8d2241ed4589cf449843f2f1d18bf0a9, type: 3}
+  - {fileID: 1316172224053426867, guid: 63af72136cda12046b4b1e1e1de4be88, type: 3}
+  - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
+  - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
   wantedCharacterImage: {fileID: 1300329254}
 --- !u!1 &2037071868
