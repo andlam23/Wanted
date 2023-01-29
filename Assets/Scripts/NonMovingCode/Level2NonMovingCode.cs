@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 public class Level2NonMovingCode : Level1NonMovingCode
 {

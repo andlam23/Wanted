@@ -38,16 +38,20 @@ public class MovingCodeWavy : MovingCode
             int zeroXValue = 0;
             float randomYValue = Random.Range(3.0f, 4.0f);
             int positiveOrNegativeYValue = Random.Range(0, 2) * 2 - 1;
+
             Vector2 horizontalSpeedVector2 = new Vector2(randomXValue * positiveOrNegativeXValue, zeroYValue);
             possibleCharacterSpeeds.Add(horizontalSpeedVector2);
             Vector2 verticalSpeedVector2 = new Vector2(zeroXValue, randomYValue * positiveOrNegativeYValue);
             possibleCharacterSpeeds.Add(verticalSpeedVector2);
+
             int selectHorizontalSpeedVector2 = 0;
             int selectVerticalSpeedVector2 = 1;
             int overload = 1;
+
             int possibleCharacterSpeedsIndex = Random.Range(selectHorizontalSpeedVector2, selectVerticalSpeedVector2 + overload);
             Vector2 speedVector2 = possibleCharacterSpeeds[possibleCharacterSpeedsIndex];
             characterSpeeds.Add(speedVector2);
+
             possibleCharacterSpeeds.RemoveAt(possibleCharacterSpeedsIndex);
             int remainingCharacterSpeedIndex = 0;
             possibleCharacterSpeeds.RemoveAt(remainingCharacterSpeedIndex);
