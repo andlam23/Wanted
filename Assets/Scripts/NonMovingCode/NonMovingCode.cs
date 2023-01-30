@@ -24,6 +24,7 @@ public class NonMovingCode : MonoBehaviour
     public GameObject wantedCharacterImage;
     void Start()
     {
+        DisableCharacterMovementBouncyScript();
         CreateCharactersOnGrid();
     }
     protected void CreateGrid()
@@ -92,5 +93,15 @@ public class NonMovingCode : MonoBehaviour
         //Randomizing how many wrong characters to instantiate
         numberWrongCharacters = Random.Range(minNumberWrongCharacters, maxNumberWrongCharacters + overload);
         CreateWrongCharacters();
+    }
+    protected void DisableCharacterMovementBouncyScript()
+    {
+        int numberOfCharacterPrefabs = 4;
+        //Disabling the CharacterMovementBouncy script for each prefab
+        for (int i = 0; i < numberOfCharacterPrefabs; i++)
+        {
+            CharacterMovementBouncy characterMovementBouncyScript = characterPrefabs[i].GetComponent<CharacterMovementBouncy>();
+            characterMovementBouncyScript.enabled = false;
+        }
     }
 }

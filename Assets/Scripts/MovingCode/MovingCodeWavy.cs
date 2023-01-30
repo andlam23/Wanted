@@ -6,6 +6,8 @@ public class MovingCodeWavy : MovingCode
     public List<Vector2> possibleCharacterSpeeds;
     void Start()
     {
+        DisableCharacterMovementBouncyScript();
+        EnableCharacterMovementScript();
         spawnRangeX = 9;
         spawnRangeY = 5;
         randomOffsetX = 1.0f;

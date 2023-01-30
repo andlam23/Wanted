@@ -10,6 +10,9 @@ public class WantedCharacter : MonoBehaviour
     public List<Sprite> characters;
     //Define the image component as Image
     public Image image;
+    //Define Wanted character background and poster gameobjects
+    public GameObject wantedCharacterBackground;
+    public GameObject wantedCharacterPoster;
     void Start()
     {
         image = gameObject.GetComponent<Image>();
@@ -19,7 +22,14 @@ public class WantedCharacter : MonoBehaviour
     {
         image.enabled = !image.enabled;
         image.sprite = characters[wantedCharacterIndex];
-        yield return new WaitForSeconds(5);
+
+        wantedCharacterBackground.SetActive(true);
+        wantedCharacterPoster.SetActive(true);
+
+        yield return new WaitForSeconds(3);
+
         image.enabled = !image.enabled;
+        wantedCharacterBackground.SetActive(false);
+        wantedCharacterPoster.SetActive(false);
     }
 }
