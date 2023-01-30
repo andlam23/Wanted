@@ -34,8 +34,6 @@ public class MovingCode : NonMovingCode
         rightCharacterMovement.characterSpeed = characterSpeeds[rightCharacterIndex];
         //Removing the right character speed from the list of character speeds
         characterSpeeds.RemoveAt(rightCharacterIndex);
-        //Enable the Right character's collider
-        EnableRightCharacterCollider(rightCharacter);
         //Removing the right character from the list of characters
         characterPrefabs.RemoveAt(rightCharacterIndex);
         //Removing the Vector2 from the grid list

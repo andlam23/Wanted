@@ -56,8 +56,6 @@ public class NonMovingCode : MonoBehaviour
         Renderer rightCharacterRenderer = rightCharacter.GetComponent<Renderer>();
         int behindOtherCharacters = -1;
         rightCharacterRenderer.sortingOrder = behindOtherCharacters;
-        //Enable the Right character's collider
-        EnableRightCharacterCollider(rightCharacter);
         //Removing the right character from the list of characters
         characterPrefabs.RemoveAt(rightCharacterIndex);
         //Removing the Vector2 from the grid list
@@ -105,10 +103,5 @@ public class NonMovingCode : MonoBehaviour
             CharacterMovementBouncy characterMovementBouncyScript = characterPrefabs[i].GetComponent<CharacterMovementBouncy>();
             characterMovementBouncyScript.enabled = false;
         }
-    }
-    protected void EnableRightCharacterCollider(GameObject rightCharacterGameObject)
-    {
-        Collider2D rightCharacterCollider = rightCharacterGameObject.GetComponent<CircleCollider2D>();
-        rightCharacterCollider.enabled = true;
     }
 }
