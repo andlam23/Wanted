@@ -6,6 +6,8 @@ public class MovingCode : NonMovingCode
     public List<Vector2> characterSpeeds;
     void Start()
     {
+        DisableCharacterMovementBouncyScript();
+        EnableCharacterMovementScript();
         randomOffsetX = 1.0f;
         randomOffsetY = 1.0f;
         DetermineCharacterSpeeds(); 
@@ -85,6 +87,16 @@ public class MovingCode : NonMovingCode
             int positiveOrNegativeYValue = Random.Range(0, 2) * 2 - 1;
             Vector2 speedVector2 = new Vector2(randomXValue * positiveOrNegativeXValue, randomYValue * positiveOrNegativeYValue);
             characterSpeeds.Add(speedVector2);
+        }
+    }
+    protected void EnableCharacterMovementScript()
+    {
+        int numberOfCharacterPrefabs = 4;
+        //Enabling the CharacterMovement script for each prefab
+        for (int i = 0; i < numberOfCharacterPrefabs; i++)
+        {
+            CharacterMovement characterMovementScript = characterPrefabs[i].GetComponent<CharacterMovement>();
+            characterMovementScript.enabled = true;
         }
     }
 }
