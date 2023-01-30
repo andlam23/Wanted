@@ -19,6 +19,10 @@ public class CharacterMovement : MonoBehaviour
     protected float buffer = 0.1f;
     // define not moving
     protected int notMoving = 0;
+    // define level loader gameobject
+    public GameObject levelLoaderGameObject;
+    // define level loader class
+    private LevelLoader levelLoaderScript;
     void Start()
     {
         // set actual boundaries for game area
@@ -110,5 +114,10 @@ public class CharacterMovement : MonoBehaviour
             characterYValue = reverse * characterYValue - buffer;
             SetNewPosition();
         }
+    }
+    private void OnMouseDown()
+    {
+        levelLoaderScript = levelLoaderGameObject.GetComponent<LevelLoader>();
+        levelLoaderScript.loadNextLevel();
     }
 }
