@@ -19,6 +19,8 @@ public class CharacterMovement : MonoBehaviour
     protected float buffer = 0.1f;
     // define not moving
     protected int notMoving = 0;
+    // define GameManager
+    protected GameObject gameManager;
     void Start()
     {
         // set actual boundaries for game area
@@ -113,7 +115,8 @@ public class CharacterMovement : MonoBehaviour
     }
     protected void OnMouseDown()
     {
-        DestroyCharacters();        
+        LoadLevel2();
+        DestroyCharacters();
     }
     protected void DestroyCharacters()
     {
@@ -122,5 +125,17 @@ public class CharacterMovement : MonoBehaviour
         {
             Destroy(character);
         }
+    }
+    protected void LoadLevel2()
+    {
+        gameManager = GameObject.Find("GameManager");
+        Level2NonMovingCode level2 = gameManager.GetComponent<Level2NonMovingCode>();
+        level2.enabled = true;
+    }
+    protected void LoadLevel3()
+    {
+        gameManager = GameObject.Find("GameManager");
+        Level3NonMovingCode level3 = gameManager.GetComponent<Level3NonMovingCode>();
+        level3.enabled = true;
     }
 }
