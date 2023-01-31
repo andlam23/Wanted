@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 8057558024364251766}
   - component: {fileID: -2394236128370950005}
   - component: {fileID: 7637785405100094033}
+  - component: {fileID: 3439336807833037822}
   m_Layer: 0
   m_Name: Character Pack 1_Character 1_1
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterSpeed: {x: 0, y: 0}
+  gameManagerGameObject: {fileID: 4918515065554740776, guid: c8eb7569398113e46bd2421b6ae6c477, type: 3}
+  wantedCharacterGameObject: {fileID: 3513680013874846345, guid: d59e2bc358d73a640bc526ad2cce7368, type: 3}
+  wantedCharacterPosterGameObject: {fileID: 9163503583306886397, guid: 00d93c056903d3143b897cfbb3bd443c, type: 3}
+  wantedCharacterBackgroundGameObject: {fileID: 815306469772991373, guid: c22ffdfd2f9f9794586de63e0aa2e0d5, type: 3}
 --- !u!114 &7637785405100094033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,3 +117,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterSpeed: {x: 0, y: 0}
+  gameManagerGameObject: {fileID: 4918515065554740776, guid: c8eb7569398113e46bd2421b6ae6c477, type: 3}
+  wantedCharacterGameObject: {fileID: 3513680013874846345, guid: d59e2bc358d73a640bc526ad2cce7368, type: 3}
+  wantedCharacterPosterGameObject: {fileID: 9163503583306886397, guid: 00d93c056903d3143b897cfbb3bd443c, type: 3}
+  wantedCharacterBackgroundGameObject: {fileID: 815306469772991373, guid: c22ffdfd2f9f9794586de63e0aa2e0d5, type: 3}
+--- !u!58 &3439336807833037822
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8438278854340025298}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.8

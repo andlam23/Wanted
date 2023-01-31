@@ -111,4 +111,16 @@ public class CharacterMovement : MonoBehaviour
             SetNewPosition();
         }
     }
+    protected void OnMouseDown()
+    {
+        DestroyCharacters();        
+    }
+    protected void DestroyCharacters()
+    {
+        var characters = GameObject.FindGameObjectsWithTag("Character");
+        foreach (var character in characters)
+        {
+            Destroy(character);
+        }
+    }
 }

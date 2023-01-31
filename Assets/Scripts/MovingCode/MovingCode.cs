@@ -32,6 +32,8 @@ public class MovingCode : NonMovingCode
         //Getting the character movement class from the instantiated right character and setting its speed to the predetermined character speed
         CharacterMovement rightCharacterMovement = rightCharacter.GetComponent<CharacterMovement>();
         rightCharacterMovement.characterSpeed = characterSpeeds[rightCharacterIndex];
+        //Enable the Right character's collider
+        EnableRightCharacterCollider(rightCharacter);
         //Removing the right character speed from the list of character speeds
         characterSpeeds.RemoveAt(rightCharacterIndex);
         //Removing the right character from the list of characters

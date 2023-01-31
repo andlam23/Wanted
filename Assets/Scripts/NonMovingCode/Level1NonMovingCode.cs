@@ -28,7 +28,9 @@ public class Level1NonMovingCode : NonMovingCode
         //Selecting a random spawn position then instantiating the right character
         int gridIndex = Random.Range(firstGridIndex, grid.Count);
         Vector2 rightSpawnPosition = grid[gridIndex];
-        Instantiate(characterPrefabs[rightCharacterIndex], rightSpawnPosition, Quaternion.identity);
+        GameObject rightCharacter = (GameObject)Instantiate(characterPrefabs[rightCharacterIndex], rightSpawnPosition, Quaternion.identity);
+        //Enable the Right character's collider
+        EnableRightCharacterCollider(rightCharacter);
         //Removing the right character from the list of characters
         characterPrefabs.RemoveAt(rightCharacterIndex);
         //Removing the Vector2 from the grid list
