@@ -560,11 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1efcde7e6ceda4e9a9b9aeedea0cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefabs:
-  - {fileID: 8438278854340025298, guid: 8d2241ed4589cf449843f2f1d18bf0a9, type: 3}
-  - {fileID: 1316172224053426867, guid: 63af72136cda12046b4b1e1e1de4be88, type: 3}
-  - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
-  - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
+  characterPrefabs: []
   grid: []
   wantedCharacterImage: {fileID: 1300329254}
 --- !u!4 &1836292993

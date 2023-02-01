@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 public class NonMovingCode : MonoBehaviour
 {
@@ -107,6 +108,8 @@ public class NonMovingCode : MonoBehaviour
     }
     public void DisableCharacterMovementBouncyScript()
     {
+        //Reload character prefabs first because the for loop requires it
+        ReloadCharacterPrefabs();
         int numberOfCharacterPrefabs = 4;
         //Disabling the CharacterMovementBouncy script for each prefab
         for (int i = 0; i < numberOfCharacterPrefabs; i++)
@@ -119,5 +122,12 @@ public class NonMovingCode : MonoBehaviour
     {
         Collider2D rightCharacterCollider = rightCharacterGameObject.GetComponent<CircleCollider2D>();
         rightCharacterCollider.enabled = true;
+    }
+    protected void ReloadCharacterPrefabs()
+    {
+        //Removing the right character from the list of characters
+        characterPrefabs.Clear();
+        //Adding prefabs from CharacterPack1 folder from Resources folder to list of characters
+        characterPrefabs = Resources.LoadAll<GameObject>("CharacterPack1").ToList();
     }
 }
