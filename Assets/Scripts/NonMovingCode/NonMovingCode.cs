@@ -54,7 +54,16 @@ public class NonMovingCode : MonoBehaviour
         Vector2 rightSpawnPosition = grid[gridIndex] + randomOffset;
         GameObject rightCharacter = (GameObject)Instantiate(characterPrefabs[rightCharacterIndex], rightSpawnPosition, Quaternion.identity);
         Renderer rightCharacterRenderer = rightCharacter.GetComponent<Renderer>();
-        int behindOtherCharacters = -1;
+        //Making Right character appear in front of wrong characters until level 7
+        int behindOtherCharacters;
+        if (CharacterMovement.gameLevel < 6)
+        {
+            behindOtherCharacters = 3;
+        }
+        else
+        {
+            behindOtherCharacters = -1;
+        }
         rightCharacterRenderer.sortingOrder = behindOtherCharacters;
         //Enable the Right character's collider
         EnableRightCharacterCollider(rightCharacter);
@@ -82,7 +91,7 @@ public class NonMovingCode : MonoBehaviour
             grid.RemoveAt(gridIndex);
         }
     }
-    protected void CreateCharactersOnGrid()
+    public void CreateCharactersOnGrid()
     {
         CreateGrid();
         CreateRightCharacter();
@@ -96,7 +105,7 @@ public class NonMovingCode : MonoBehaviour
         numberWrongCharacters = Random.Range(minNumberWrongCharacters, maxNumberWrongCharacters + overload);
         CreateWrongCharacters();
     }
-    protected void DisableCharacterMovementBouncyScript()
+    public void DisableCharacterMovementBouncyScript()
     {
         int numberOfCharacterPrefabs = 4;
         //Disabling the CharacterMovementBouncy script for each prefab

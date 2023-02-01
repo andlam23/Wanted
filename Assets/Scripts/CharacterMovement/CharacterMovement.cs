@@ -21,6 +21,8 @@ public class CharacterMovement : MonoBehaviour
     protected int notMoving = 0;
     // define GameManager
     protected GameObject gameManager;
+    // define game level
+    public static float gameLevel;
     void Start()
     {
         // set actual boundaries for game area
@@ -115,8 +117,12 @@ public class CharacterMovement : MonoBehaviour
     }
     protected void OnMouseDown()
     {
-        LoadLevel2();
         DestroyCharacters();
+        gameLevel += 0.5f;
+        LoadLevel2();
+        LoadLevel3();
+        LoadLevel4();
+        LoadLevel5();
     }
     protected void DestroyCharacters()
     {
@@ -128,14 +134,38 @@ public class CharacterMovement : MonoBehaviour
     }
     protected void LoadLevel2()
     {
-        gameManager = GameObject.Find("GameManager");
-        Level2NonMovingCode level2 = gameManager.GetComponent<Level2NonMovingCode>();
-        level2.enabled = true;
+        if (gameLevel == 1)
+        {
+            gameManager = GameObject.Find("GameManager");
+            Level2NonMovingCode level = gameManager.GetComponent<Level2NonMovingCode>();
+            level.enabled = true;
+        }
     }
     protected void LoadLevel3()
     {
-        gameManager = GameObject.Find("GameManager");
-        Level3NonMovingCode level3 = gameManager.GetComponent<Level3NonMovingCode>();
-        level3.enabled = true;
+        if (gameLevel == 2)
+        {
+            gameManager = GameObject.Find("GameManager");
+            Level3NonMovingCode level = gameManager.GetComponent<Level3NonMovingCode>();
+            level.enabled = true;
+        }
+    }
+    protected void LoadLevel4()
+    {
+        if (gameLevel == 3)
+        {
+            gameManager = GameObject.Find("GameManager");
+            NonMovingCode level = gameManager.GetComponent<NonMovingCode>();
+            level.enabled = true;
+        }
+    }
+    protected void LoadLevel5()
+    {
+        if (gameLevel == 4)
+        {
+            gameManager = GameObject.Find("GameManager");
+            NonMovingCode level = gameManager.GetComponent<NonMovingCode>();
+            level.CreateCharactersOnGrid();
+        }
     }
 }
