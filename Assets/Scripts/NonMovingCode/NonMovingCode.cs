@@ -120,6 +120,7 @@ public class NonMovingCode : MonoBehaviour
     }
     protected void EnableRightCharacterCollider(GameObject rightCharacterGameObject)
     {
+        //Enabling the circle collider on the Right character
         Collider2D rightCharacterCollider = rightCharacterGameObject.GetComponent<CircleCollider2D>();
         rightCharacterCollider.enabled = true;
     }

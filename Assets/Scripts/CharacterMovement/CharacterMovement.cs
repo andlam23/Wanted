@@ -117,18 +117,14 @@ public class CharacterMovement : MonoBehaviour
     }
     protected void OnMouseDown()
     {
+        // if Right character is clicked with circle collider turned on, destroy all characters, add 0.5f to gameLevel, and attempt to load
+        // next level. OnMouseDown calls twice because this script and CharacterMovementBouncy (which inherits from this script) are attached
+        // to the Right character. Adding 0.5f twice results in adding 1.0f to the gameLevel, so on the second call the next level can load
         DestroyCharacters();
         gameLevel += 0.5f;
-        LoadLevel2();
-        LoadLevel3();
-        LoadLevel4();
-        LoadLevel5();
-        LoadLevel6();
-        LoadLevel7();
-        LoadLevel8();
-        LoadLevel9();
-        LoadLevel10();
+        LoadLevel();
     }
+    // stores all characters in a var then destroys each of them
     protected void DestroyCharacters()
     {
         var characters = GameObject.FindGameObjectsWithTag("Character");
@@ -137,92 +133,43 @@ public class CharacterMovement : MonoBehaviour
             Destroy(character);
         }
     }
-    protected void LoadLevel2()
+    protected void LoadLevel()
     {
-        if (gameLevel == 1)
+        // if gameLevel is 1, load level 2 by finding the GameManager, accessing the level 2 script, and enabling it
+        if (gameLevel == 1) 
         {
             gameManager = GameObject.Find("GameManager");
             Level2NonMovingCode level = gameManager.GetComponent<Level2NonMovingCode>();
             level.enabled = true;
         }
-    }
-    protected void LoadLevel3()
-    {
-        if (gameLevel == 2)
+        // if gameLevel is 2, load level 3 by finding the GameManager, accessing the level 3 script, and enabling it
+        else if (gameLevel == 2)
         {
             gameManager = GameObject.Find("GameManager");
             Level3NonMovingCode level = gameManager.GetComponent<Level3NonMovingCode>();
             level.enabled = true;
         }
-    }
-    protected void LoadLevel4()
-    {
-        if (gameLevel == 3)
+        // if gameLevel is 3, load level 4 by finding the GameManager, accessing the NonMovingCode script, and enabling it
+        else if (gameLevel == 3)
         {
             gameManager = GameObject.Find("GameManager");
             NonMovingCode level = gameManager.GetComponent<NonMovingCode>();
             level.enabled = true;
         }
-    }
-    protected void LoadLevel5()
-    {
-        if (gameLevel == 4)
+        // if the gameLevel is 4 through 9, load levels 5 through 10
+        // Right character should be on bottom layer when gameLevel is 6, loading into level 7
+        else if (gameLevel >= 4 && gameLevel < 10)
         {
-            gameManager = GameObject.Find("GameManager");
-            NonMovingCode level = gameManager.GetComponent<NonMovingCode>();
-            level.DisableCharacterMovementBouncyScript();
-            level.CreateCharactersOnGrid();
+            LoadNonMovingCodeLevel();
         }
     }
-    protected void LoadLevel6()
+    // finds the GameManager, accesses the NonMovingCode script, calls two functions to disable the CharacterMovementBouncy script on
+    // character prefabs, then creates the characters
+    protected void LoadNonMovingCodeLevel()
     {
-        if (gameLevel == 5)
-        {
-            gameManager = GameObject.Find("GameManager");
-            NonMovingCode level = gameManager.GetComponent<NonMovingCode>();
-            level.DisableCharacterMovementBouncyScript();
-            level.CreateCharactersOnGrid();
-        }
-    }
-    // Right character should be on bottom layer now
-    protected void LoadLevel7()
-    {
-        if (gameLevel == 6)
-        {
-            gameManager = GameObject.Find("GameManager");
-            NonMovingCode level = gameManager.GetComponent<NonMovingCode>();
-            level.DisableCharacterMovementBouncyScript();
-            level.CreateCharactersOnGrid();
-        }
-    }
-    protected void LoadLevel8()
-    {
-        if (gameLevel == 7)
-        {
-            gameManager = GameObject.Find("GameManager");
-            NonMovingCode level = gameManager.GetComponent<NonMovingCode>();
-            level.DisableCharacterMovementBouncyScript();
-            level.CreateCharactersOnGrid();
-        }
-    }
-    protected void LoadLevel9()
-    {
-        if (gameLevel == 8)
-        {
-            gameManager = GameObject.Find("GameManager");
-            NonMovingCode level = gameManager.GetComponent<NonMovingCode>();
-            level.DisableCharacterMovementBouncyScript();
-            level.CreateCharactersOnGrid();
-        }
-    }
-    protected void LoadLevel10()
-    {
-        if (gameLevel == 9)
-        {
-            gameManager = GameObject.Find("GameManager");
-            NonMovingCode level = gameManager.GetComponent<NonMovingCode>();
-            level.DisableCharacterMovementBouncyScript();
-            level.CreateCharactersOnGrid();
-        }
+        gameManager = GameObject.Find("GameManager");
+        NonMovingCode level = gameManager.GetComponent<NonMovingCode>();
+        level.DisableCharacterMovementBouncyScript();
+        level.CreateCharactersOnGrid();
     }
 }

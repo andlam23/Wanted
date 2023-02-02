@@ -17,7 +17,8 @@ public class WantedCharacter : MonoBehaviour
     {
         image = gameObject.GetComponent<Image>();
     }
-    //Define a function to set the UI image to the character assigned the Wanted character index
+    //Define a coroutine to set the UI image to the character assigned the Wanted character index and also setting the 
+    //Wanted character background and poster to active, show them for 3 seconds, then disable them
     public IEnumerator SetWantedCharacter()
     {
         image.enabled = !image.enabled;
@@ -29,6 +30,7 @@ public class WantedCharacter : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         image.enabled = !image.enabled;
+
         wantedCharacterBackground.SetActive(false);
         wantedCharacterPoster.SetActive(false);
     }
