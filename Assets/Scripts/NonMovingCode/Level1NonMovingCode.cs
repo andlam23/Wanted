@@ -3,6 +3,9 @@ public class Level1NonMovingCode : NonMovingCode
 {
     void Start()
     {
+        //Currently, if the game ends on a Bouncy character level, it will make the game start with characters bouncing
+        //so we need to disable it from level 1
+        DisableCharacterMovementBouncyScript();
         CreateCharactersOnGrid();
     }
     protected new void CreateGrid()

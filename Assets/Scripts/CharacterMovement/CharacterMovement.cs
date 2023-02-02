@@ -162,14 +162,120 @@ public class CharacterMovement : MonoBehaviour
         {
             LoadNonMovingCodeLevel();
         }
+        else if (gameLevel == 10)
+        {
+            gameManager = GameObject.Find("GameManager");
+            MovingCode level = gameManager.GetComponent<MovingCode>();
+            level.enabled = true;
+        }
+        else if (gameLevel == 11)
+        {
+            gameManager = GameObject.Find("GameManager");
+            MovingCodeWavy level = gameManager.GetComponent<MovingCodeWavy>();
+            level.enabled = true;
+        }
+        else if (gameLevel == 12)
+        {
+            LoadNonMovingCodeLevel();
+        }
+        else if (gameLevel == 13)
+        {
+            gameManager = GameObject.Find("GameManager");
+            MovingCodeBouncy level = gameManager.GetComponent<MovingCodeBouncy>();
+            level.enabled = true;
+        }
+        else if (gameLevel == 14)
+        {
+            LoadNonMovingCodeLevel();
+        }
+        else if (gameLevel == 15)
+        {
+            LoadMovingCodeLevel();
+        }
+        // THESE TWO LEVELS ARE USED TO TEST WAVY AND BOUNCY LEVEL FUNCTIONS
+        else if (gameLevel == 16)
+        {
+            LoadMovingCodeWavyLevel();
+        }
+        else if (gameLevel == 17)
+        {
+            LoadMovingCodeBouncyLevel();
+        }
+        //
+        else if (gameLevel > 17)
+        {
+            int level = Random.Range(1, 4 + 1);
+            if (level == 1)
+            {
+                LoadNonMovingCodeLevel();
+            }
+            if (level == 2)
+            {
+                LoadMovingCodeLevel();
+            }
+            if (level == 3)
+            {
+                LoadMovingCodeWavyLevel();
+            }
+            if (level == 4)
+            {
+                LoadMovingCodeBouncyLevel();
+            }
+        }
     }
     // finds the GameManager, accesses the NonMovingCode script, calls two functions to disable the CharacterMovementBouncy script on
     // character prefabs, then creates the characters
     protected void LoadNonMovingCodeLevel()
     {
+        //Disable function is before Enable and Determine functions because CharacterPrefabs are reloaded in the Disable function
         gameManager = GameObject.Find("GameManager");
         NonMovingCode level = gameManager.GetComponent<NonMovingCode>();
         level.DisableCharacterMovementBouncyScript();
+        level.spawnRangeX = 8;
+        level.spawnRangeY = 4;
+        level.randomOffsetX = 0.3f;
+        level.randomOffsetY = 0.3f;
+        level.CreateCharactersOnGrid();
+    }
+    protected void LoadMovingCodeLevel()
+    {
+        //Disable function is before Enable and Determine functions because CharacterPrefabs are reloaded in the Disable function
+        gameManager = GameObject.Find("GameManager");
+        MovingCode level = gameManager.GetComponent<MovingCode>();
+        level.DisableCharacterMovementBouncyScript();
+        level.EnableCharacterMovementScript();
+        level.spawnRangeX = 8;
+        level.spawnRangeY = 4;
+        level.randomOffsetX = 1.0f;
+        level.randomOffsetY = 1.0f;
+        level.DetermineCharacterSpeeds();
+        level.CreateCharactersOnGrid();
+    }
+    protected void LoadMovingCodeWavyLevel()
+    {
+        gameManager = GameObject.Find("GameManager");
+        MovingCodeWavy level = gameManager.GetComponent<MovingCodeWavy>();
+        //Disable function is before Enable and Determine functions because CharacterPrefabs are reloaded in the Disable function
+        level.DisableCharacterMovementBouncyScript();
+        level.EnableCharacterMovementScript();
+        level.spawnRangeX = 9;
+        level.spawnRangeY = 5;
+        level.randomOffsetX = 1.0f;
+        level.randomOffsetY = 1.0f;
+        level.DetermineCharacterSpeeds();
+        level.CreateCharactersOnGrid();
+    }
+    protected void LoadMovingCodeBouncyLevel()
+    {
+        gameManager = GameObject.Find("GameManager");
+        MovingCodeBouncy level = gameManager.GetComponent<MovingCodeBouncy>();
+        //Disable function is before Enable and Determine functions because CharacterPrefabs are reloaded in the Disable function
+        level.DisableCharacterMovementScript();
+        level.EnableCharacterMovementBouncyScript();
+        level.spawnRangeX = 8;
+        level.spawnRangeY = 4;
+        level.randomOffsetX = 1.0f;
+        level.randomOffsetY = 1.0f;
         level.CreateCharactersOnGrid();
     }
 }

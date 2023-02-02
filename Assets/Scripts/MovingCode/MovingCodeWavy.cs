@@ -6,6 +6,7 @@ public class MovingCodeWavy : MovingCode
     public List<Vector2> possibleCharacterSpeeds;
     void Start()
     {
+        //Disable function is before Enable and Determine functions because CharacterPrefabs are reloaded in the Disable function
         DisableCharacterMovementBouncyScript();
         EnableCharacterMovementScript();
         spawnRangeX = 9;
@@ -15,8 +16,11 @@ public class MovingCodeWavy : MovingCode
         DetermineCharacterSpeeds(); 
         CreateCharactersOnGrid();
     }
-    protected new void CreateCharactersOnGrid()
+    public new void CreateCharactersOnGrid()
     {
+        //Removing all grid spaces from the grid before recreating the grid spaces (to prevent duplicate grid spaces)
+        grid.Clear();
+        //
         CreateGrid();
         CreateRightCharacter();
         int positiveAndNegativeRange = 2;
@@ -29,7 +33,7 @@ public class MovingCodeWavy : MovingCode
         numberWrongCharacters = Random.Range(minNumberWrongCharacters, maxNumberWrongCharacters + overload);
         CreateWrongCharacters();
     }
-    protected new void DetermineCharacterSpeeds()
+    public new void DetermineCharacterSpeeds()
     {
         //Determine character speeds by randomly choosing between a randomly generated horizontal and vertical speed
         for (int i = 0; i < characterPrefabs.Count; i++)

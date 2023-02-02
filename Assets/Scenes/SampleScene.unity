@@ -310,7 +310,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 131.3797}
+  m_AnchoredPosition: {x: 0, y: 131.37971}
   m_SizeDelta: {x: 240.3252, y: 213.2094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1160537860
@@ -484,7 +484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 53.999985}
+  m_AnchoredPosition: {x: 0, y: 54.00006}
   m_SizeDelta: {x: 317.9718, y: 373.694}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1492685096
@@ -562,6 +562,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterPrefabs: []
   grid: []
+  spawnRangeX: 8
+  spawnRangeY: 4
+  randomOffsetX: 0.3
+  randomOffsetY: 0.3
   wantedCharacterImage: {fileID: 1300329254}
 --- !u!4 &1836292993
 Transform:
@@ -596,6 +600,10 @@ MonoBehaviour:
   - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
   - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
+  spawnRangeX: 8
+  spawnRangeY: 4
+  randomOffsetX: 0.3
+  randomOffsetY: 0.3
   wantedCharacterImage: {fileID: 1300329254}
   characterSpeeds: []
 --- !u!114 &1836292995
@@ -616,6 +624,10 @@ MonoBehaviour:
   - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
   - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
+  spawnRangeX: 8
+  spawnRangeY: 4
+  randomOffsetX: 0.3
+  randomOffsetY: 0.3
   wantedCharacterImage: {fileID: 1300329254}
   characterSpeeds: []
   possibleCharacterSpeeds: []
@@ -637,6 +649,10 @@ MonoBehaviour:
   - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
   - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
+  spawnRangeX: 8
+  spawnRangeY: 4
+  randomOffsetX: 0.3
+  randomOffsetY: 0.3
   wantedCharacterImage: {fileID: 1300329254}
 --- !u!114 &1836292997
 MonoBehaviour:
@@ -656,6 +672,10 @@ MonoBehaviour:
   - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
   - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
+  spawnRangeX: 8
+  spawnRangeY: 4
+  randomOffsetX: 0.3
+  randomOffsetY: 0.3
   wantedCharacterImage: {fileID: 1300329254}
 --- !u!114 &1836292998
 MonoBehaviour:
@@ -675,6 +695,10 @@ MonoBehaviour:
   - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
   - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
+  spawnRangeX: 8
+  spawnRangeY: 4
+  randomOffsetX: 0.3
+  randomOffsetY: 0.3
   wantedCharacterImage: {fileID: 1300329254}
 --- !u!114 &1836292999
 MonoBehaviour:
@@ -694,6 +718,10 @@ MonoBehaviour:
   - {fileID: 994290673592112852, guid: d64c57b430b14d24eac599c9e3277951, type: 3}
   - {fileID: 2652864591387921938, guid: 397ac2d903d46044a8bdceaf2c092adc, type: 3}
   grid: []
+  spawnRangeX: 8
+  spawnRangeY: 4
+  randomOffsetX: 0.3
+  randomOffsetY: 0.3
   wantedCharacterImage: {fileID: 1300329254}
 --- !u!1 &2037071868
 GameObject:

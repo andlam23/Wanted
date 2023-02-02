@@ -12,20 +12,25 @@ public class NonMovingCode : MonoBehaviour
     //Define first grid index
     protected int firstGridIndex = 0;
     //Character spawn area
-    protected int spawnRangeX = 8;
-    protected int spawnRangeY = 4;
+    public int spawnRangeX;
+    public int spawnRangeY;
     //Number of wrong characters to instantiate
     protected int numberWrongCharacters;
     //Define no offset for a character's position
     protected float noOffset = 0;
     //Define random X and Y offset for a character's position
-    protected float randomOffsetX = 0.3f;
-    protected float randomOffsetY = 0.3f;
+    public float randomOffsetX;
+    public float randomOffsetY;
     //Define a Wanted character gameobject
     public GameObject wantedCharacterImage;
     void Start()
     {
+        //Disable function is before Enable and Determine functions because CharacterPrefabs are reloaded in the Disable function
         DisableCharacterMovementBouncyScript();
+        spawnRangeX = 8;
+        spawnRangeY = 4;
+        randomOffsetX = 0.3f;
+        randomOffsetY = 0.3f;
         CreateCharactersOnGrid();
     }
     protected void CreateGrid()

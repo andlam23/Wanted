@@ -6,8 +6,11 @@ public class MovingCode : NonMovingCode
     public List<Vector2> characterSpeeds;
     void Start()
     {
+        //Disable function is before Enable and Determine functions because CharacterPrefabs are reloaded in the Disable function
         DisableCharacterMovementBouncyScript();
         EnableCharacterMovementScript();
+        spawnRangeX = 8;
+        spawnRangeY = 4;
         randomOffsetX = 1.0f;
         randomOffsetY = 1.0f;
         DetermineCharacterSpeeds(); 
@@ -64,8 +67,11 @@ public class MovingCode : NonMovingCode
             grid.RemoveAt(gridIndex);
         }
     }
-    protected new void CreateCharactersOnGrid()
+    public new void CreateCharactersOnGrid()
     {
+        //Removing all grid spaces from the grid before recreating the grid spaces (to prevent duplicate grid spaces)
+        grid.Clear();
+        //
         CreateGrid();
         CreateRightCharacter();
         int positiveAndNegativeRange = 2;
@@ -78,7 +84,7 @@ public class MovingCode : NonMovingCode
         numberWrongCharacters = Random.Range(minNumberWrongCharacters, maxNumberWrongCharacters + overload);
         CreateWrongCharacters();
     }
-    protected void DetermineCharacterSpeeds()
+    public void DetermineCharacterSpeeds()
     {
         //Determine character speeds
         for (int i = 0; i < characterPrefabs.Count; i++)
@@ -91,7 +97,7 @@ public class MovingCode : NonMovingCode
             characterSpeeds.Add(speedVector2);
         }
     }
-    protected void EnableCharacterMovementScript()
+    public void EnableCharacterMovementScript()
     {
         int numberOfCharacterPrefabs = 4;
         //Enabling the CharacterMovement script for each prefab

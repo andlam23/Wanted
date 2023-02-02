@@ -21,15 +21,15 @@ public class WantedCharacter : MonoBehaviour
     //Wanted character background and poster to active, show them for 3 seconds, then disable them
     public IEnumerator SetWantedCharacter()
     {
-        image.enabled = !image.enabled;
+        image.enabled = true;
         image.sprite = characters[wantedCharacterIndex];
 
         wantedCharacterBackground.SetActive(true);
         wantedCharacterPoster.SetActive(true);
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
 
-        image.enabled = !image.enabled;
+        image.enabled = false;
 
         wantedCharacterBackground.SetActive(false);
         wantedCharacterPoster.SetActive(false);
