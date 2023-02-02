@@ -94,6 +94,9 @@ public class NonMovingCode : MonoBehaviour
     }
     public void CreateCharactersOnGrid()
     {
+        //Removing all grid spaces from the grid before recreating the grid spaces (to prevent duplicate grid spaces)
+        grid.Clear();
+        //
         CreateGrid();
         CreateRightCharacter();
         int positiveAndNegativeRange = 2;
@@ -126,7 +129,7 @@ public class NonMovingCode : MonoBehaviour
     }
     protected void ReloadCharacterPrefabs()
     {
-        //Removing the right character from the list of characters
+        //Removing all characters from the list of characters
         characterPrefabs.Clear();
         //Adding prefabs from CharacterPack1 folder from Resources folder to list of characters
         characterPrefabs = Resources.LoadAll<GameObject>("CharacterPack1").ToList();
