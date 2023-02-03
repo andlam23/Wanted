@@ -27,7 +27,7 @@ public class Level1NonMovingCode : NonMovingCode
         //Setting the right character index as the Wanted character index
         WantedCharacter wantedCharacter = wantedCharacterImage.GetComponent<WantedCharacter>();
         wantedCharacter.wantedCharacterIndex = rightCharacterIndex;
-        StartCoroutine(wantedCharacter.SetWantedCharacter());
+        StartCoroutine(wantedCharacter.DisplayWantedCharacterAndGameLevelAndStar());
         //Selecting a random spawn position then instantiating the right character
         int gridIndex = Random.Range(firstGridIndex, grid.Count);
         Vector2 rightSpawnPosition = grid[gridIndex];

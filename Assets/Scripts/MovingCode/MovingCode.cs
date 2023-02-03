@@ -23,7 +23,7 @@ public class MovingCode : NonMovingCode
         //Setting the right character index as the Wanted character index
         WantedCharacter wantedCharacter = wantedCharacterImage.GetComponent<WantedCharacter>();
         wantedCharacter.wantedCharacterIndex = rightCharacterIndex;
-        StartCoroutine(wantedCharacter.SetWantedCharacter());
+        StartCoroutine(wantedCharacter.DisplayWantedCharacterAndGameLevelAndStar());
         //
         int gridIndex = Random.Range(firstGridIndex, grid.Count);
         Vector2 randomOffset = new Vector2(Random.Range(noOffset, randomOffsetX), Random.Range(noOffset, randomOffsetY));
