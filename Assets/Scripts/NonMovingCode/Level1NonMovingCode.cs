@@ -10,29 +10,31 @@ public class Level1NonMovingCode : NonMovingCode
     }
     protected new void CreateGrid()
     {
-        //Creating a 2x2 grid of Vector2 and adding it to the grid list
-                Vector2 grid1Vector2 = new Vector2(0.75f, 0.75f);
-                grid.Add(grid1Vector2);
-                Vector2 grid2Vector2 = new Vector2(0.75f, -0.75f);
-                grid.Add(grid2Vector2);
-                Vector2 grid3Vector2 = new Vector2(-0.75f, 0.75f);
-                grid.Add(grid3Vector2);
-                Vector2 grid4Vector2 = new Vector2(-0.75f, -0.75f);
-                grid.Add(grid4Vector2);
+        //Creating a grid of Vector2's from -0.75,-0.75 to 0.75,0.75 and adding it to the grid list
+        for (float i = -0.5f; i <= 0.5f; i++)
+        {
+            float x = i * 3.0f / 2.0f;
+            for (float j = -0.5f; j <= 0.5f; j++)
+            {
+                float y = j * 3.0f / 2.0f;
+                Vector2 gridVector2 = new Vector2(x, y);
+                grid.Add(gridVector2);
+            }
+        }
     }
     protected new void CreateRightCharacter()
     {
-        //Selecting a random right character
+        //Selecting a random character index to be the Right character index
         int rightCharacterIndex = Random.Range(firstCharacterPrefab, characterPrefabs.Count);
-        //Setting the right character index as the Wanted character index
-        WantedCharacter wantedCharacter = wantedCharacterImage.GetComponent<WantedCharacter>();
+        //Setting the Right character index as the Wanted character index
+        WantedCharacterAndStars wantedCharacter = wantedCharacterImage.GetComponent<WantedCharacterAndStars>();
         wantedCharacter.wantedCharacterIndex = rightCharacterIndex;
         StartCoroutine(wantedCharacter.DisplayWantedCharacterAndGameLevelAndStar());
-        //Selecting a random spawn position then instantiating the right character
+        //Selecting a random spawn position then instantiating the Right character
         int gridIndex = Random.Range(firstGridIndex, grid.Count);
         Vector2 rightSpawnPosition = grid[gridIndex];
         GameObject rightCharacter = (GameObject)Instantiate(characterPrefabs[rightCharacterIndex], rightSpawnPosition, Quaternion.identity);
-        //Enable the Right character's collider
+        //Enabling the Right character's collider
         EnableRightCharacterCollider(rightCharacter);
         //Removing the right character from the list of characters
         characterPrefabs.RemoveAt(rightCharacterIndex);
@@ -44,8 +46,10 @@ public class Level1NonMovingCode : NonMovingCode
         //Selecting a random wrong character and random spawn position, then instantiating it
         for (int i = 0; i < numberWrongCharacters; i++)
         {
+            //Selecting a random character index to be the Wrong character index
             int wrongCharacterIndex = Random.Range(firstCharacterPrefab, characterPrefabs.Count);
             int gridIndex = Random.Range(firstGridIndex, grid.Count);
+            //Selecting a random spawn position then instantiating the Wrong character
             Vector2 wrongSpawnPosition = grid[gridIndex];
             Instantiate(characterPrefabs[wrongCharacterIndex], wrongSpawnPosition, Quaternion.identity);
             //Removing the wrong character from the list of characters
