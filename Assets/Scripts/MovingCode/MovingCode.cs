@@ -16,33 +16,69 @@ public class MovingCode : NonMovingCode
         DetermineCharacterSpeeds(); 
         CreateCharactersOnGrid();
     }
+    protected void SetWantedCharacterIndex(int characterIndex)
+    {
+        //Setting the right character index as the Wanted character index
+        WantedCharacterAndStars wantedCharacter = wantedCharacterImage.GetComponent<WantedCharacterAndStars>();
+        wantedCharacter.wantedCharacterIndex = characterIndex;
+        StartCoroutine(wantedCharacter.DisplayWantedCharacterAndGameLevelAndStar());
+    }
+    protected int DetermineCharacterGridIndex()
+    {
+        int characterGridIndex = Random.Range(firstGridIndex, grid.Count);
+        return characterGridIndex;
+    }
+    protected Vector2 DetermineCharacterSpawnPosition(int gridIndex)
+    {
+        
+        //Determine the spawn position for a character
+        Vector2 randomOffset = new Vector2(Random.Range(noOffset, randomOffsetX), Random.Range(noOffset, randomOffsetY));
+        Vector2 spawnPosition = grid[gridIndex] + randomOffset;
+        return spawnPosition;
+    }
+    protected void SetToBottomLayer(GameObject rightCharacterGameObject)
+    {
+        //Set the sorting order of the Right character to the bottom layer
+        Renderer rightCharacterRenderer = rightCharacterGameObject.GetComponent<Renderer>();
+        int behindOtherCharacters = -1;
+        rightCharacterRenderer.sortingOrder = behindOtherCharacters;
+    }
+    protected void SetCharacterSpeed(GameObject characterGameObject, int characterIndex)
+    {
+        //Getting the character movement class from the instantiated character and setting its speed to the predetermined character speed
+        CharacterMovement characterMovement = characterGameObject.GetComponent<CharacterMovement>();
+        characterMovement.characterSpeed = characterSpeeds[characterIndex];
+    }
+    protected void RemoveFromLists(int characterIndex, int characterGridIndex)
+    {
+        //Removing the right character speed from the list of character speeds
+        characterSpeeds.RemoveAt(characterIndex);
+        //Removing the right character from the list of characters
+        characterPrefabs.RemoveAt(characterIndex);
+        //Removing the Vector2 from the grid list
+        grid.RemoveAt(characterGridIndex);
+    }
     protected new void CreateRightCharacter()
     {
         //Selecting a random right character and random spawn position with a random offset, instantiating it, and setting it to the bottom layer
         int rightCharacterIndex = Random.Range(firstCharacterPrefab, characterPrefabs.Count);
-        //Setting the right character index as the Wanted character index
-        WantedCharacter wantedCharacter = wantedCharacterImage.GetComponent<WantedCharacter>();
-        wantedCharacter.wantedCharacterIndex = rightCharacterIndex;
-        StartCoroutine(wantedCharacter.DisplayWantedCharacterAndGameLevelAndStar());
-        //
-        int gridIndex = Random.Range(firstGridIndex, grid.Count);
-        Vector2 randomOffset = new Vector2(Random.Range(noOffset, randomOffsetX), Random.Range(noOffset, randomOffsetY));
-        Vector2 rightSpawnPosition = grid[gridIndex] + randomOffset;
+        SetWantedCharacterIndex(rightCharacterIndex);
+        int rightCharacterGridIndex = DetermineCharacterGridIndex();
+        Vector2 rightSpawnPosition = DetermineCharacterSpawnPosition(rightCharacterGridIndex);
         GameObject rightCharacter = (GameObject)Instantiate(characterPrefabs[rightCharacterIndex], rightSpawnPosition, Quaternion.identity);
-        Renderer rightCharacterRenderer = rightCharacter.GetComponent<Renderer>();
-        int behindOtherCharacters = -1;
-        rightCharacterRenderer.sortingOrder = behindOtherCharacters;
-        //Getting the character movement class from the instantiated right character and setting its speed to the predetermined character speed
-        CharacterMovement rightCharacterMovement = rightCharacter.GetComponent<CharacterMovement>();
-        rightCharacterMovement.characterSpeed = characterSpeeds[rightCharacterIndex];
+        SetToBottomLayer(rightCharacter);
+        SetCharacterSpeed(rightCharacter, rightCharacterIndex);
         //Enable the Right character's collider
         EnableRightCharacterCollider(rightCharacter);
-        //Removing the right character speed from the list of character speeds
-        characterSpeeds.RemoveAt(rightCharacterIndex);
-        //Removing the right character from the list of characters
-        characterPrefabs.RemoveAt(rightCharacterIndex);
-        //Removing the Vector2 from the grid list
-        grid.RemoveAt(gridIndex);
+        RemoveFromLists(rightCharacterIndex, rightCharacterGridIndex);
+    }
+    protected void SetToRandomNonBottomLayer(GameObject wrongCharacterGameObject)
+    {
+        Renderer wrongCharacterRenderer = wrongCharacterGameObject.GetComponent<Renderer>();
+        int firstUniqueWrongCharacter = 0;
+        int numberUniqueWrongCharacters = 3;
+        int randomSortingOrder = Random.Range(firstUniqueWrongCharacter, numberUniqueWrongCharacters);
+        wrongCharacterRenderer.sortingOrder = randomSortingOrder;
     }
     protected new void CreateWrongCharacters()
     {
@@ -50,21 +86,13 @@ public class MovingCode : NonMovingCode
         for (int i = 0; i < numberWrongCharacters; i++)
         {
             int wrongCharacterIndex = Random.Range(firstCharacterPrefab, characterPrefabs.Count);
-            int gridIndex = Random.Range(firstGridIndex, grid.Count);
-            Vector2 randomOffset = new Vector2(Random.Range(noOffset, randomOffsetX), Random.Range(noOffset, randomOffsetY));
-            Vector2 wrongSpawnPosition = grid[gridIndex] + randomOffset;
+            int wrongCharacterGridIndex = DetermineCharacterGridIndex();
+            Vector2 wrongSpawnPosition = DetermineCharacterSpawnPosition(wrongCharacterGridIndex);
             GameObject wrongCharacter = (GameObject)Instantiate(characterPrefabs[wrongCharacterIndex], wrongSpawnPosition, Quaternion.identity);
-            //Getting the character movement class from the instantiated wrong character and setting its speed to the predetermined character speed
-            CharacterMovement wrongCharacterMovement = wrongCharacter.GetComponent<CharacterMovement>();
-            wrongCharacterMovement.characterSpeed = characterSpeeds[wrongCharacterIndex];
-            //
-            Renderer wrongCharacterRenderer = wrongCharacter.GetComponent<Renderer>();
-            int firstUniqueWrongCharacter = 0;
-            int numberUniqueWrongCharacters = 3;
-            int randomSortingOrder = Random.Range(firstUniqueWrongCharacter, numberUniqueWrongCharacters);
-            wrongCharacterRenderer.sortingOrder = randomSortingOrder;
+            SetToRandomNonBottomLayer(wrongCharacter);
+            SetCharacterSpeed(wrongCharacter, wrongCharacterIndex);
             //Removing the Vector2 from the grid list
-            grid.RemoveAt(gridIndex);
+            grid.RemoveAt(wrongCharacterGridIndex);
         }
     }
     public new void CreateCharactersOnGrid()
