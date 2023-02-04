@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class WantedCharacter : MonoBehaviour
+public class WantedCharacterAndStars : MonoBehaviour
 {
     //Define a Wanted character index for the game manager script to assign a value to
     public int wantedCharacterIndex;
@@ -36,9 +36,11 @@ public class WantedCharacter : MonoBehaviour
         //Create star for completing previous level
         CreateStar();
 
+        //Enable the Wanted character image and change the sprite to the Wanted character
         image.enabled = true;
         image.sprite = characters[wantedCharacterIndex];
 
+        //Set the Wanted character background and poster active
         wantedCharacterBackground.SetActive(true);
         wantedCharacterPoster.SetActive(true);
 
@@ -46,16 +48,17 @@ public class WantedCharacter : MonoBehaviour
         float overload = 1.0f;
         levelText.text = "Level " + (CharacterMovement.gameLevel + overload);
         levelText.enabled = true;
-        //
 
+        //Wait for 1 seconds
         yield return new WaitForSeconds(1);
 
         //Disable the Level text
         levelText.enabled = false;
-        //
 
+        //Disable the Wanted character image
         image.enabled = false;
 
+        //Set the Wanted character background and poster to inactive
         wantedCharacterBackground.SetActive(false);
         wantedCharacterPoster.SetActive(false);
     }
@@ -67,56 +70,54 @@ public class WantedCharacter : MonoBehaviour
     //Create star for completing previous level
     protected void CreateStar()
     {
-        if (CharacterMovement.gameLevel == 1)
+        //Show the first four stars
+        if (CharacterMovement.gameLevel >= 1 && CharacterMovement.gameLevel < 5)
         {
             EnableStarImage((int)CharacterMovement.gameLevel - starOverload);
         }
-        if (CharacterMovement.gameLevel == 2)
-        {
-            EnableStarImage((int)CharacterMovement.gameLevel - starOverload);
-        }
-        if (CharacterMovement.gameLevel == 3)
-        {
-            EnableStarImage((int)CharacterMovement.gameLevel - starOverload);
-        }
-        if (CharacterMovement.gameLevel == 4)
-        {
-            EnableStarImage((int)CharacterMovement.gameLevel - starOverload);
-        }
-        if (CharacterMovement.gameLevel == 5)
+        //Disable the first four stars and enable the multi-star
+        else if (CharacterMovement.gameLevel == 5)
         {
             DisableStarImage(CharacterMovement.gameLevel);
             EnableMultiStarImage();
         }
-        if (CharacterMovement.gameLevel >= 6)
+        else if (CharacterMovement.gameLevel >= 6)
         {
             //Return multiple of 5 based on game level: 5 for 6-10, 10 for 11-15, 15 for 16-20...
             int multipleOf5 = (int)Mathf.Floor((CharacterMovement.gameLevel - 1) / 5) * 5;
-            //Return star number to enable
+            //Determine star number to enable by subtracting the multiple of 5 from the game Level
             int starNumber = (int)CharacterMovement.gameLevel - multipleOf5;
+            //Enable the corresponding star
             EnableStarImage(starNumber);
+            //Disable the star images based on the game level
             DisableStarImage(CharacterMovement.gameLevel);
         }
     }
     protected void EnableStarImage(int starNumber)
     {
+        //Access the image component from the star in the list and enable it
         Image starImage = stars[starNumber].GetComponent<Image>();
         starImage.enabled = true;
+        Debug.Log("Star" + starNumber + "enabled");
     }
     protected void DisableStarImage(float gameLevel)
     {
+        //Define a boolean that is true when the gamelevel has no remainder when divided by 5, and false when there is a remainder
         bool gameLevelIsDivisibleBy5 = gameLevel % 5 == 0;
 
+        //If the boolean is true, disable the image component for each star in the star list
         if (gameLevelIsDivisibleBy5)
         {
             foreach (var star in stars)
             {
                 star.GetComponent<Image>().enabled = false;
             }
+            Debug.Log("All Stars Disabled");
         }
     }
     protected void EnableMultiStarImage()
     {
+        //Find the MultiStarIcon gameobject, access the image component, and enable it
         multiStar = GameObject.Find("MultiStarIcon");
         Image multiStarImage = multiStar.GetComponent<Image>();
         multiStarImage.enabled = true;

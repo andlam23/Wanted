@@ -41,12 +41,12 @@ public class MovingCodeWavy : MovingCode
             float randomXValue = Random.Range(1.0f, 2.0f);
             int positiveOrNegativeXValue = Random.Range(0, 2) * 2 - 1;
             int zeroYValue = 0;
+            Vector2 horizontalSpeedVector2 = new Vector2(randomXValue * positiveOrNegativeXValue, zeroYValue);
+            possibleCharacterSpeeds.Add(horizontalSpeedVector2);
+
             int zeroXValue = 0;
             float randomYValue = Random.Range(3.0f, 4.0f);
             int positiveOrNegativeYValue = Random.Range(0, 2) * 2 - 1;
-
-            Vector2 horizontalSpeedVector2 = new Vector2(randomXValue * positiveOrNegativeXValue, zeroYValue);
-            possibleCharacterSpeeds.Add(horizontalSpeedVector2);
             Vector2 verticalSpeedVector2 = new Vector2(zeroXValue, randomYValue * positiveOrNegativeYValue);
             possibleCharacterSpeeds.Add(verticalSpeedVector2);
 
@@ -58,9 +58,7 @@ public class MovingCodeWavy : MovingCode
             Vector2 speedVector2 = possibleCharacterSpeeds[possibleCharacterSpeedsIndex];
             characterSpeeds.Add(speedVector2);
 
-            possibleCharacterSpeeds.RemoveAt(possibleCharacterSpeedsIndex);
-            int remainingCharacterSpeedIndex = 0;
-            possibleCharacterSpeeds.RemoveAt(remainingCharacterSpeedIndex);
+            possibleCharacterSpeeds.Clear();
         }
     }
 }
