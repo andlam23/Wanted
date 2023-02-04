@@ -48,23 +48,25 @@ public class NonMovingCode : MonoBehaviour
     }
     protected void CreateRightCharacter()
     {
-        //Selecting a random right character and random spawn position with a random offset, instantiating it, and setting it to the bottom layer
+        //Selecting a random character index to be the right character index
         int rightCharacterIndex = Random.Range(firstCharacterPrefab, characterPrefabs.Count);
         //Setting the right character index as the Wanted character index
-        WantedCharacter wantedCharacter = wantedCharacterImage.GetComponent<WantedCharacter>();
+        WantedCharacterAndStars wantedCharacter = wantedCharacterImage.GetComponent<WantedCharacterAndStars>();
         wantedCharacter.wantedCharacterIndex = rightCharacterIndex;
         StartCoroutine(wantedCharacter.DisplayWantedCharacterAndGameLevelAndStar());
-        //
+        //Determining spawn position for the Right character
         int gridIndex = Random.Range(firstGridIndex, grid.Count);
         Vector2 randomOffset = new Vector2(Random.Range(noOffset, randomOffsetX), Random.Range(noOffset, randomOffsetY));
         Vector2 rightSpawnPosition = grid[gridIndex] + randomOffset;
+        //Instantiating the right character
         GameObject rightCharacter = (GameObject)Instantiate(characterPrefabs[rightCharacterIndex], rightSpawnPosition, Quaternion.identity);
+        //Making Right character appear in front of wrong characters until level 7, when it will start to appear behind wrong characters
         Renderer rightCharacterRenderer = rightCharacter.GetComponent<Renderer>();
-        //Making Right character appear in front of wrong characters until level 7
         int behindOtherCharacters;
         if (CharacterMovement.gameLevel < 6)
         {
-            behindOtherCharacters = 3;
+            int inFrontOtherCharacters = 3;
+            behindOtherCharacters = inFrontOtherCharacters;
         }
         else
         {
@@ -83,11 +85,15 @@ public class NonMovingCode : MonoBehaviour
         //Selecting a random wrong character and random spawn position with a random offset, then instantiating it, and setting it to a random non-bottom layer
         for (int i = 0; i < numberWrongCharacters; i++)
         {
+            //Selecting a random character index to be the wrong character index
             int wrongCharacterIndex = Random.Range(firstCharacterPrefab, characterPrefabs.Count);
+            //Determining spawn position for the wrong character
             int gridIndex = Random.Range(firstGridIndex, grid.Count);
             Vector2 randomOffset = new Vector2(Random.Range(noOffset, randomOffsetX), Random.Range(noOffset, randomOffsetY));
             Vector2 wrongSpawnPosition = grid[gridIndex] + randomOffset;
+            //Instantiating the wrong character
             GameObject wrongCharacter = (GameObject)Instantiate(characterPrefabs[wrongCharacterIndex], wrongSpawnPosition, Quaternion.identity);
+            //Randomly setting the sorting order of the wrong character
             Renderer wrongCharacterRenderer = wrongCharacter.GetComponent<Renderer>();
             int firstUniqueWrongCharacter = 0;
             int numberUniqueWrongCharacters = 3;
