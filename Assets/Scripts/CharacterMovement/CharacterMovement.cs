@@ -201,23 +201,25 @@ public class CharacterMovement : MonoBehaviour
         {
             LoadMovingCodeBouncyLevel();
         }
-        //
-        else if (gameLevel > 17)
+        //gameLevel % 1 == 0 is true only if gameLevel is an integer, which solves for OnMouseDown() calling this function twice
+        else if (gameLevel > 17 && gameLevel % 1 == 0)
         {
-            int level = Random.Range(1, 4 + 1);
+            int numberMovementPatterns = 4;
+            int overload = 1;
+            int level = Random.Range(1, numberMovementPatterns + overload);
             if (level == 1)
             {
                 LoadNonMovingCodeLevel();
             }
-            if (level == 2)
+            else if (level == 2)
             {
                 LoadMovingCodeLevel();
             }
-            if (level == 3)
+            else if (level == 3)
             {
                 LoadMovingCodeWavyLevel();
             }
-            if (level == 4)
+            else if (level == 4)
             {
                 LoadMovingCodeBouncyLevel();
             }
