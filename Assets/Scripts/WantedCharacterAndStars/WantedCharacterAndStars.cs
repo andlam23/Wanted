@@ -22,6 +22,8 @@ public class WantedCharacterAndStars : MonoBehaviour
     private int starOverload = 1;
     // define MultiStar gameobject
     private GameObject multiStar;
+    // define MultiStar text
+    public TextMeshProUGUI multiStarText;
     void Start()
     {
         //Get the image component
@@ -75,11 +77,12 @@ public class WantedCharacterAndStars : MonoBehaviour
         {
             EnableStarImage((int)CharacterMovement.gameLevel - starOverload);
         }
-        //Disable the first four stars and enable the multi-star
+        //Disable the first four stars, enable the MultiStar, and update its score
         else if (CharacterMovement.gameLevel == 5)
         {
             DisableStarImage(CharacterMovement.gameLevel);
             EnableMultiStarImage();
+            UpdateMultiStarScore(CharacterMovement.gameLevel);
         }
         else if (CharacterMovement.gameLevel >= 6)
         {
@@ -91,6 +94,8 @@ public class WantedCharacterAndStars : MonoBehaviour
             EnableStarImage(starNumber);
             //Disable the star images based on the game level
             DisableStarImage(CharacterMovement.gameLevel);
+            //Update the MultiStar score based on the game level
+            UpdateMultiStarScore(CharacterMovement.gameLevel);
         }
     }
     protected void EnableStarImage(int starNumber)
@@ -98,7 +103,6 @@ public class WantedCharacterAndStars : MonoBehaviour
         //Access the image component from the star in the list and enable it
         Image starImage = stars[starNumber].GetComponent<Image>();
         starImage.enabled = true;
-        Debug.Log("Star" + starNumber + "enabled");
     }
     protected void DisableStarImage(float gameLevel)
     {
@@ -112,7 +116,17 @@ public class WantedCharacterAndStars : MonoBehaviour
             {
                 star.GetComponent<Image>().enabled = false;
             }
-            Debug.Log("All Stars Disabled");
+        }
+    }
+    protected void UpdateMultiStarScore(float gameLevel)
+    {
+        //Define a boolean that is true when the gamelevel has no remainder when divided by 5, and false when there is a remainder
+        bool gameLevelIsDivisibleBy5 = gameLevel % 5 == 0;
+
+        //If the boolean is true, update the text to be the last multiple of 5 the game level was
+        if (gameLevelIsDivisibleBy5)
+        {
+            multiStarText.text = "" + (CharacterMovement.gameLevel);
         }
     }
     protected void EnableMultiStarImage()
