@@ -48,7 +48,7 @@ public class WantedCharacterAndStars : MonoBehaviour
 
         //Change text to Level and level number, gameLevel is 1 behind the current level so add an overload of 1, then enable the Level text
         float overload = 1.0f;
-        levelText.text = "Level " + (CharacterMovement.gameLevel + overload);
+        levelText.text = "Level " + (ClickFunctionality.gameLevel + overload);
         levelText.enabled = true;
 
         //Wait for 1 seconds
@@ -73,29 +73,29 @@ public class WantedCharacterAndStars : MonoBehaviour
     protected void CreateStar()
     {
         //Show the first four stars
-        if (CharacterMovement.gameLevel >= 1 && CharacterMovement.gameLevel < 5)
+        if (ClickFunctionality.gameLevel >= 1 && ClickFunctionality.gameLevel < 5)
         {
-            EnableStarImage((int)CharacterMovement.gameLevel - starOverload);
+            EnableStarImage((int)ClickFunctionality.gameLevel - starOverload);
         }
         //Disable the first four stars, enable the MultiStar, and update its score
-        else if (CharacterMovement.gameLevel == 5)
+        else if (ClickFunctionality.gameLevel == 5)
         {
-            DisableStarImage(CharacterMovement.gameLevel);
+            DisableStarImage(ClickFunctionality.gameLevel);
             EnableMultiStarImage();
-            UpdateMultiStarScore(CharacterMovement.gameLevel);
+            UpdateMultiStarScore(ClickFunctionality.gameLevel);
         }
-        else if (CharacterMovement.gameLevel >= 6)
+        else if (ClickFunctionality.gameLevel >= 6)
         {
             //Return multiple of 5 based on game level: 5 for 6-10, 10 for 11-15, 15 for 16-20...
-            int multipleOf5 = (int)Mathf.Floor((CharacterMovement.gameLevel - 1) / 5) * 5;
+            int multipleOf5 = (int)Mathf.Floor((ClickFunctionality.gameLevel - 1) / 5) * 5;
             //Determine star number to enable by subtracting the multiple of 5 from the game Level
-            int starNumber = (int)CharacterMovement.gameLevel - multipleOf5;
+            int starNumber = (int)ClickFunctionality.gameLevel - multipleOf5;
             //Enable the corresponding star
             EnableStarImage(starNumber);
             //Disable the star images based on the game level
-            DisableStarImage(CharacterMovement.gameLevel);
+            DisableStarImage(ClickFunctionality.gameLevel);
             //Update the MultiStar score based on the game level
-            UpdateMultiStarScore(CharacterMovement.gameLevel);
+            UpdateMultiStarScore(ClickFunctionality.gameLevel);
         }
     }
     protected void EnableStarImage(int starNumber)
@@ -126,7 +126,7 @@ public class WantedCharacterAndStars : MonoBehaviour
         //If the boolean is true, update the text to be the last multiple of 5 the game level was
         if (gameLevelIsDivisibleBy5)
         {
-            multiStarText.text = "" + (CharacterMovement.gameLevel);
+            multiStarText.text = "" + (ClickFunctionality.gameLevel);
         }
     }
     protected void EnableMultiStarImage()

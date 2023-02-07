@@ -63,7 +63,7 @@ public class NonMovingCode : MonoBehaviour
         //Making Right character appear in front of wrong characters until level 7, when it will start to appear behind wrong characters
         Renderer rightCharacterRenderer = rightCharacter.GetComponent<Renderer>();
         int behindOtherCharacters;
-        if (CharacterMovement.gameLevel < 6)
+        if (ClickFunctionality.gameLevel < 6)
         {
             int inFrontOtherCharacters = 3;
             behindOtherCharacters = inFrontOtherCharacters;

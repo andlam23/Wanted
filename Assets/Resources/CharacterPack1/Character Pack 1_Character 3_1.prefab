@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -9215285791058162108}
   - component: {fileID: 7046792789096219442}
   - component: {fileID: -406819618337342247}
+  - component: {fileID: -2908467940199707166}
   m_Layer: 0
   m_Name: Character Pack 1_Character 3_1
   m_TagString: Character
@@ -94,7 +95,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994290673592112852}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44531602498a036469c5a0eb8d4a391c, type: 3}
   m_Name: 
@@ -129,3 +130,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.8
+--- !u!114 &-2908467940199707166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994290673592112852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4e9e44f8f8f6f04d8300952be96fdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
