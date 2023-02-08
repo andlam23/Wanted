@@ -8,38 +8,60 @@ public class ClickFunctionality : MonoBehaviour
     protected GameObject gameManager;
     // define game level
     public static float gameLevel;
-    // define time buffer before the next level
+    // define a bool for time buffer before the next level
     public static bool nextLevelBuffer;
+    // define a bool for Right character or not
+    public bool isRightCharacter;
     protected void OnMouseDown()
     {
-        // start the display +5 coroutine
-        StartCoroutine(DisplayPlus5());
-        //
-        gameLevel += 1;
-        // if Right character is clicked with circle collider turned on, destroy all characters, add 1 to gameLevel, and attempt to load
-        // next level
-        StartCoroutine(DestroyCharactersAndPauseCountdownAndLoadLevel());
-        //Add 5 seconds to time for completing previous level
-        TimeText.time += 5;
-        //Clamps the time between 0 and 20 seconds
-        TimeText.time = Mathf.Clamp(TimeText.time, 0, 20);
+        // if Right character is clicked, perform the following
+        if (isRightCharacter)
+        {
+            // start the display +5 coroutine
+            StartCoroutine(DisplayTimeGainAndLoss("+5"));
+            //
+            gameLevel += 1;
+            // if Right character is clicked with circle collider turned on, destroy all characters, add 1 to gameLevel, and attempt to load
+            // next level
+            StartCoroutine(DestroyCharactersAndPauseCountdownAndLoadLevel());
+            //Add 5 seconds to time for completing previous level
+            TimeText.time += 5;
+            //Prevent time from exceeding 30 seconds
+            if (TimeText.time > 30)
+            {
+                TimeText.time = 30;
+            }
+        }
+        // if wrong character is clicked, perform the following
+        else
+        {
+            // start the display -10 coroutine
+            StartCoroutine(DisplayTimeGainAndLoss("-10"));
+            //Subtract 5 seconds from time for clicking wrong character
+            TimeText.time -= 10;
+            //Prevent time from going below 0 seconds
+            if (TimeText.time < 0)
+            {
+                TimeText.time = 0;
+            }
+        }
     }
-    public IEnumerator DisplayPlus5()
+    public IEnumerator DisplayTimeGainAndLoss(string gainOrLossGameObject)
     {
-        //Find the +5 gameobject, access the RectTransform component
-        GameObject plus5 = GameObject.Find("+5");
-        RectTransform rectTransform = plus5.GetComponent<RectTransform>();
-        //Find the Cavnvas gameobject, access the RectTransform component
+        //Find the +5 or -10 gameobject, access the RectTransform component
+        GameObject gainOrLoss = GameObject.Find(gainOrLossGameObject);
+        RectTransform rectTransform = gainOrLoss.GetComponent<RectTransform>();
+        //Find the Canvas gameobject, access the RectTransform component
         GameObject canvas = GameObject.Find("Canvas");
         RectTransform canvasRectTransform = canvas.GetComponent<RectTransform>();
-        //Convert transform.position of Right character to an anchored position
+        //Convert transform.position of character to an anchored position
         Vector2 anchoredTransformPosition = Camera.main.WorldToScreenPoint(transform.position);
         //Define canvas offset
         Vector2 offset = canvasRectTransform.sizeDelta / 2;
-        //Set anchored position of +5 gameobject to anchored position of Right character minus canvas offset
+        //Set anchored position of +5 or -10 gameobject to anchored position of character minus canvas offset
         rectTransform.anchoredPosition = anchoredTransformPosition - offset;
-        //Access the +5 gameobject image component
-        Image image = plus5.GetComponent<Image>();
+        //Access the +5 or -10 gameobject image component
+        Image image = gainOrLoss.GetComponent<Image>();
         //Enable the image
         image.enabled = true;
         //Wait for 1 seconds

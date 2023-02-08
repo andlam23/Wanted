@@ -14,8 +14,8 @@ public class TimeText : MonoBehaviour
     }
     void Update()
     {
-        //If time is greater than 0 and next level buffer is false
-        if (time > 0 && !ClickFunctionality.nextLevelBuffer)
+        //If time is greater than oe equal to 0 and next level buffer is false
+        if (time >= 0 && !ClickFunctionality.nextLevelBuffer)
         {
             //Update the time on every frame
             UpdateTime();
@@ -23,13 +23,15 @@ public class TimeText : MonoBehaviour
     }
     private void UpdateTime()
     {
-        //Subtract the time between the current and previous frame from time
-        time -= Time.deltaTime;
+        // If time is greater than 0,
+        if (time > 0)
+        {
+            //Subtract the time between the current and previous frame from time
+            time -= Time.deltaTime;
+        }
         //Define a new line in the text box
         string newLine = Environment.NewLine;
-        {
-            //Change time text to the new time remaining
-            timeText.text = "Time" + newLine + Mathf.Round(time);
-        }
+        //Change time text to the new time remaining
+        timeText.text = "Time" + newLine + Mathf.Round(time);
     }
 }
