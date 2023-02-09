@@ -60,9 +60,9 @@ public class NonMovingCode : MonoBehaviour
         Vector2 rightSpawnPosition = grid[gridIndex] + randomOffset;
         //Instantiating the right character
         GameObject rightCharacter = (GameObject)Instantiate(characterPrefabs[rightCharacterIndex], rightSpawnPosition, Quaternion.identity);
-        //Accessing the Right character's ClickFunctionality script and setting isRightCharacter bool to true
-        ClickFunctionality rightCharacterClickFunctionality = rightCharacter.GetComponent<ClickFunctionality>();
-        rightCharacterClickFunctionality.isRightCharacter = true;
+        //Accessing the Right character's SetCharacterLayer script and setting isRightCharacter bool to true
+        SetCharacterLayer rightCharacterSetCharacterLayer = rightCharacter.GetComponent<SetCharacterLayer>();
+        rightCharacterSetCharacterLayer.isRightCharacter = true;
         //Making Right character appear in front of wrong characters until level 7, when it will start to appear behind wrong characters
         Renderer rightCharacterRenderer = rightCharacter.GetComponent<Renderer>();
         int behindOtherCharacters;

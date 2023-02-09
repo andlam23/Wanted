@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7003283310144260413}
   - component: {fileID: -584869055342662405}
   - component: {fileID: 5827169763588269717}
-  - component: {fileID: -602700784782177595}
+  - component: {fileID: -3655483778525235706}
   m_Layer: 0
   m_Name: Character 3_1
   m_TagString: Character
@@ -130,7 +130,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.8
---- !u!114 &-602700784782177595
+--- !u!114 &-3655483778525235706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8254123071006964455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4e9e44f8f8f6f04d8300952be96fdd3, type: 3}
+  m_Script: {fileID: 11500000, guid: 27469b05204ff424a9a7b202039d63db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isRightCharacter: 0

@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ClickFunctionality : MonoBehaviour
 {
@@ -10,68 +9,54 @@ public class ClickFunctionality : MonoBehaviour
     public static float gameLevel;
     // define a bool for time buffer before the next level
     public static bool nextLevelBuffer;
-    // define a bool for Right character or not
-    public bool isRightCharacter;
-    protected void OnMouseDown()
+    // define a bool for whether Right character was clicked
+    public static bool isRightCharacterClicked;
+    private void Update()
     {
-        // if Right character is clicked, perform the following
-        if (isRightCharacter)
+        if (Input.GetMouseButtonDown(0) && !isRightCharacterClicked)
         {
-            // start the display +5 coroutine
-            StartCoroutine(DisplayTimeGainAndLoss("+5"));
-            //
-            gameLevel += 1;
-            // if Right character is clicked with circle collider turned on, destroy all characters, add 1 to gameLevel, and attempt to load
-            // next level
-            StartCoroutine(DestroyCharactersAndPauseCountdownAndLoadLevel());
-            //Add 5 seconds to time for completing previous level
-            TimeText.time += 5;
-            //Prevent time from exceeding 30 seconds
-            if (TimeText.time > 30)
+            Ray clickPoint = Camera.main.ScreenPointToRay(Input.mousePosition);
+            LayerMask rightCharacterLayer = LayerMask.GetMask("RightCharacter");
+            RaycastHit2D rightHit = Physics2D.GetRayIntersection(clickPoint, Mathf.Infinity, rightCharacterLayer);
+            if (rightHit.collider != null)
             {
-                TimeText.time = 30;
+                SetCharacterLayer rightCharacterSetCharacterLayer = rightHit.collider.transform.gameObject.GetComponent<SetCharacterLayer>();
+                // start the display +5 coroutine
+                StartCoroutine(rightCharacterSetCharacterLayer.DisplayTimeGainAndLoss("+5"));
+                //
+                gameLevel += 1;
+                // if Right character is clicked with circle collider turned on, destroy all characters, add 1 to gameLevel, and attempt to load
+                // next level
+                StartCoroutine(DestroyCharactersAndPauseCountdownAndLoadLevel());
+                //Add 5 seconds to time for completing previous level
+                TimeText.time += 5;
+                //Prevent time from exceeding 30 seconds
+                if (TimeText.time > 30)
+                {
+                    TimeText.time = 30;
+                }
+            }
+            LayerMask wrongCharacterLayer = LayerMask.GetMask("WrongCharacter");
+            RaycastHit2D wrongHit = Physics2D.GetRayIntersection(clickPoint, Mathf.Infinity, wrongCharacterLayer);
+            if (wrongHit.collider != null && !isRightCharacterClicked)
+            {
+                SetCharacterLayer wrongCharacterSetCharacterLayer = wrongHit.collider.transform.gameObject.GetComponent<SetCharacterLayer>();
+                // start the display -10 coroutine
+                StartCoroutine(wrongCharacterSetCharacterLayer.DisplayTimeGainAndLoss("-10"));
+                //Subtract 5 seconds from time for clicking wrong character
+                TimeText.time -= 10;
+                //Prevent time from going below 0 seconds
+                if (TimeText.time < 0)
+                {
+                    TimeText.time = 0;
+                }
             }
         }
-        // if wrong character is clicked, perform the following
-        else
-        {
-            // start the display -10 coroutine
-            StartCoroutine(DisplayTimeGainAndLoss("-10"));
-            //Subtract 5 seconds from time for clicking wrong character
-            TimeText.time -= 10;
-            //Prevent time from going below 0 seconds
-            if (TimeText.time < 0)
-            {
-                TimeText.time = 0;
-            }
-        }
-    }
-    public IEnumerator DisplayTimeGainAndLoss(string gainOrLossGameObject)
-    {
-        //Find the +5 or -10 gameobject, access the RectTransform component
-        GameObject gainOrLoss = GameObject.Find(gainOrLossGameObject);
-        RectTransform rectTransform = gainOrLoss.GetComponent<RectTransform>();
-        //Find the Canvas gameobject, access the RectTransform component
-        GameObject canvas = GameObject.Find("Canvas");
-        RectTransform canvasRectTransform = canvas.GetComponent<RectTransform>();
-        //Convert transform.position of character to an anchored position
-        Vector2 anchoredTransformPosition = Camera.main.WorldToScreenPoint(transform.position);
-        //Define canvas offset
-        Vector2 offset = canvasRectTransform.sizeDelta / 2;
-        //Set anchored position of +5 or -10 gameobject to anchored position of character minus canvas offset
-        rectTransform.anchoredPosition = anchoredTransformPosition - offset;
-        //Access the +5 or -10 gameobject image component
-        Image image = gainOrLoss.GetComponent<Image>();
-        //Enable the image
-        image.enabled = true;
-        //Wait for 1 seconds
-        yield return new WaitForSeconds(2);
-        //Disable image component
-        image.enabled = false;
     }
     // stores all characters in a var then destroys each of them
     public IEnumerator DestroyCharactersAndPauseCountdownAndLoadLevel()
     {
+        isRightCharacterClicked = true;
         // set buffer for next level to true
         nextLevelBuffer = true;
         //
@@ -85,6 +70,7 @@ public class ClickFunctionality : MonoBehaviour
             Destroy(character);
         }
         LoadLevel();
+        isRightCharacterClicked = false;
     }
     protected void LoadLevel()
     {

@@ -34,9 +34,9 @@ public class Level1NonMovingCode : NonMovingCode
         int gridIndex = Random.Range(firstGridIndex, grid.Count);
         Vector2 rightSpawnPosition = grid[gridIndex];
         GameObject rightCharacter = (GameObject)Instantiate(characterPrefabs[rightCharacterIndex], rightSpawnPosition, Quaternion.identity);
-        //Accessing the Right character's ClickFunctionality script and setting isRightCharacter bool to true
-        ClickFunctionality rightCharacterClickFunctionality = rightCharacter.GetComponent<ClickFunctionality>();
-        rightCharacterClickFunctionality.isRightCharacter = true;
+        //Accessing the Right character's SetCharacterLayer script and setting isRightCharacter bool to true
+        SetCharacterLayer rightCharacterSetCharacterLayer = rightCharacter.GetComponent<SetCharacterLayer>();
+        rightCharacterSetCharacterLayer.isRightCharacter = true;
         //Removing the right character from the list of characters
         characterPrefabs.RemoveAt(rightCharacterIndex);
         //Removing the Vector2 from the grid list
