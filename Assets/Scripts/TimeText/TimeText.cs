@@ -1,25 +1,47 @@
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 public class TimeText : MonoBehaviour
 {
     //Define TextMeshProUGUI time text
     private TextMeshProUGUI timeText;
     //Define starting time
     public static float time = 10;
+    // define GameOver gameobject
+    private GameObject gameOver;
+    // define whether the game is active
+    public static bool isGameActive;
     void Start()
     {
+        isGameActive = true;
         //Get the TextMeshProUGUI component
         timeText = GetComponent<TextMeshProUGUI>();
     }
     void Update()
     {
-        //If time is greater than oe equal to 0 and next level buffer is false
+        //If time is greater than or equal to 0 and next level buffer is false
         if (time >= 0 && !ClickFunctionality.nextLevelBuffer)
         {
             //Update the time on every frame
             UpdateTime();
         }
+        //If time is less than 0, set time to 0
+        if (time < 0)
+        {
+            time = 0;
+            // GameOver image will appear
+            EnableGameOverImage();
+        }
+    }
+    private void EnableGameOverImage()
+    {
+        //Find the GameOver gameobject, access the image component, and enable it
+        gameOver = GameObject.Find("GameOver");
+        Image gameOverImage = gameOver.GetComponent<Image>();
+        gameOverImage.enabled = true;
+        // Set game to not active
+        isGameActive = false;
     }
     private void UpdateTime()
     {

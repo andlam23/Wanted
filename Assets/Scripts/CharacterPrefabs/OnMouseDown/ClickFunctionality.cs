@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-
 public class ClickFunctionality : MonoBehaviour
 {
     // define GameManager
@@ -13,7 +12,7 @@ public class ClickFunctionality : MonoBehaviour
     public static bool isRightCharacterClicked;
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isRightCharacterClicked)
+        if (Input.GetMouseButtonDown(0) && !isRightCharacterClicked && TimeText.isGameActive)
         {
             Ray clickPoint = Camera.main.ScreenPointToRay(Input.mousePosition);
             LayerMask rightCharacterLayer = LayerMask.GetMask("RightCharacter");
@@ -45,11 +44,6 @@ public class ClickFunctionality : MonoBehaviour
                 StartCoroutine(wrongCharacterSetCharacterLayer.DisplayTimeGainAndLoss("-10"));
                 //Subtract 5 seconds from time for clicking wrong character
                 TimeText.time -= 10;
-                //Prevent time from going below 0 seconds
-                if (TimeText.time < 0)
-                {
-                    TimeText.time = 0;
-                }
             }
         }
     }
