@@ -14,20 +14,25 @@ public class ClickFunctionality : MonoBehaviour
     public static GameObject rightCharacterGameObject;
     private void Update()
     {
+        // if the mouse ic clicked and the right character has not been clicked and the game is active
         if (Input.GetMouseButtonDown(0) && !isRightCharacterClicked && TimeText.isGameActive)
         {
+            // convert the mouse position on the screen to a ray
             Ray clickPoint = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // define the right character layermask
             LayerMask rightCharacterLayer = LayerMask.GetMask("RightCharacter");
+            // define the hit from casting the ray in the right character layermask
             RaycastHit2D rightHit = Physics2D.GetRayIntersection(clickPoint, Mathf.Infinity, rightCharacterLayer);
+            // if what was hit has a collider (the right character's collider)
             if (rightHit.collider != null)
             {
+                // get the set character layer component and
                 SetCharacterLayer rightCharacterSetCharacterLayer = rightHit.collider.transform.gameObject.GetComponent<SetCharacterLayer>();
                 // start the display +5 coroutine
                 StartCoroutine(rightCharacterSetCharacterLayer.DisplayTimeGainAndLoss("+5"));
-                //
+                // add 1 to game level
                 gameLevel += 1;
-                // if Right character is clicked with circle collider turned on, destroy all characters, add 1 to gameLevel, and attempt to load
-                // next level
+                // start the destroy characters, pause countdown, and load level coroutine
                 StartCoroutine(DestroyCharactersAndPauseCountdownAndLoadLevel());
                 //Add 5 seconds to time for completing previous level
                 TimeText.time += 5;
@@ -37,13 +42,19 @@ public class ClickFunctionality : MonoBehaviour
                     TimeText.time = 30;
                 }
             }
+            // define the wrong character layermask
             LayerMask wrongCharacterLayer = LayerMask.GetMask("WrongCharacter");
+            // define the hit from casting the ray in the wrong character layermask
             RaycastHit2D wrongHit = Physics2D.GetRayIntersection(clickPoint, Mathf.Infinity, wrongCharacterLayer);
+            // if what was hit has a collider (a wrong character's collider) and the right character has not been clicked
             if (wrongHit.collider != null && !isRightCharacterClicked)
             {
+                // get the set character layer component and
                 SetCharacterLayer wrongCharacterSetCharacterLayer = wrongHit.collider.transform.gameObject.GetComponent<SetCharacterLayer>();
                 // start the display -10 coroutine
                 StartCoroutine(wrongCharacterSetCharacterLayer.DisplayTimeGainAndLoss("-10"));
+                // start the blink coroutine
+                StartCoroutine(Blink(wrongHit.collider.gameObject));
                 //Subtract 5 seconds from time for clicking wrong character
                 TimeText.time -= 10;
             }
@@ -56,16 +67,8 @@ public class ClickFunctionality : MonoBehaviour
         isRightCharacterClicked = true;
         // set buffer for next level to true
         nextLevelBuffer = true;
-        // stores all characters in a var then destroys each of them if it is not the right character
-        var characters = GameObject.FindGameObjectsWithTag("Character");
-        foreach (var character in characters)
-        {
-            if (character != rightCharacterGameObject)
-            Destroy(character);
-        }
-        // deactivate the right character's movement scripts
-        rightCharacterGameObject.GetComponent<CharacterMovement>().enabled = false;
-        rightCharacterGameObject.GetComponent<CharacterMovementBouncy>().enabled = false;
+        // Destroy the wrong characters
+        DestroyWrongCharacters();
         // wait for 2 seconds
         yield return new WaitForSeconds(2);
         // set buffer for next level to false
@@ -76,6 +79,37 @@ public class ClickFunctionality : MonoBehaviour
         LoadLevel();
         // set "is Right Character clicked" to false
         isRightCharacterClicked = false;
+    }
+    // Destroy characters except for the right character
+    public static void DestroyWrongCharacters()
+    {
+        // stores all characters in a var then destroys each of them if it is not the right character
+        var characters = GameObject.FindGameObjectsWithTag("Character");
+        foreach (var character in characters)
+        {
+            if (character != rightCharacterGameObject)
+                Destroy(character);
+        }
+        // deactivate the right character's movement scripts
+        rightCharacterGameObject.GetComponent<CharacterMovement>().enabled = false;
+        rightCharacterGameObject.GetComponent<CharacterMovementBouncy>().enabled = false;
+    }
+    // Define coroutine to make the wrong character gameobject blink
+    IEnumerator Blink(GameObject wrongCharacterGameObject)
+    {
+        // access the Renderer component from the wrong character gameobject
+        Renderer wrongCharacterRenderer = wrongCharacterGameObject.GetComponent<Renderer>();
+        // define number of blinks
+        int numberOfBlinks = 8;
+        // define a for loop to turn the renderer off and on numberOfBlinks times
+        for (int i = 0; i < numberOfBlinks; i++)
+        {
+            float blinkSpeed = 0.065f;
+            wrongCharacterRenderer.enabled = false;
+            yield return new WaitForSeconds(blinkSpeed);
+            wrongCharacterRenderer.enabled = true;
+            yield return new WaitForSeconds(blinkSpeed);
+        }
     }
     protected void LoadLevel()
     {

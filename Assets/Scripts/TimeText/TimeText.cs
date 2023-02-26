@@ -2,15 +2,17 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.UI;
+using System.Collections;
+
 public class TimeText : MonoBehaviour
 {
     //Define TextMeshProUGUI time text
     private TextMeshProUGUI timeText;
     //Define starting time
     public static float time = 10;
-    // define GameOver gameobject
+    //Define GameOver gameobject
     private GameObject gameOver;
-    // define whether the game is active
+    //Define whether the game is active
     public static bool isGameActive;
     void Start()
     {
@@ -26,13 +28,28 @@ public class TimeText : MonoBehaviour
             //Update the time on every frame
             UpdateTime();
         }
-        //If time is less than 0, set time to 0
+        //If time is less than 0, set time to 0 and start the game over sequence coroutine
         if (time < 0)
         {
             time = 0;
-            // GameOver image will appear
-            EnableGameOverImage();
+            StartCoroutine(StartGameOverSequence());
         }
+    }
+    //Define a coroutine to start the game over sequence
+    public IEnumerator StartGameOverSequence()
+    {
+        //Set the right character game object to the default layer
+        ClickFunctionality.rightCharacterGameObject.layer = 0;
+        //Wait for 1.05 seconds
+        yield return new WaitForSeconds(1.05f);
+        //Destroy the wrong characters
+        ClickFunctionality.DestroyWrongCharacters();
+        //Wait for 2 seconds
+        yield return new WaitForSeconds(2);
+        //Destroy the right character
+        Destroy(ClickFunctionality.rightCharacterGameObject);
+        //GameOver image will appear
+        EnableGameOverImage();
     }
     private void EnableGameOverImage()
     {
