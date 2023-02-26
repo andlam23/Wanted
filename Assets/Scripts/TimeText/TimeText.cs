@@ -38,6 +38,8 @@ public class TimeText : MonoBehaviour
     //Define a coroutine to start the game over sequence
     public IEnumerator StartGameOverSequence()
     {
+        // Set game to not active
+        isGameActive = false;
         //Set the right character game object to the default layer
         ClickFunctionality.rightCharacterGameObject.layer = 0;
         //Wait for 1.05 seconds
@@ -57,8 +59,6 @@ public class TimeText : MonoBehaviour
         gameOver = GameObject.Find("GameOver");
         Image gameOverImage = gameOver.GetComponent<Image>();
         gameOverImage.enabled = true;
-        // Set game to not active
-        isGameActive = false;
     }
     private void UpdateTime()
     {
