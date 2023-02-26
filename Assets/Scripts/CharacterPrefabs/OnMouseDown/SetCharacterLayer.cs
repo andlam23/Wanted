@@ -23,15 +23,8 @@ public class SetCharacterLayer : MonoBehaviour
         //Find the +5 or -10 gameobject, access the RectTransform component
         GameObject gainOrLoss = GameObject.Find(gainOrLossGameObject);
         RectTransform rectTransform = gainOrLoss.GetComponent<RectTransform>();
-        //Find the Canvas gameobject, access the RectTransform component
-        GameObject canvas = GameObject.Find("Canvas");
-        RectTransform canvasRectTransform = canvas.GetComponent<RectTransform>();
-        //Convert transform.position of character to an anchored position
-        Vector2 anchoredTransformPosition = Camera.main.WorldToScreenPoint(transform.position);
-        //Define canvas offset
-        Vector2 offset = canvasRectTransform.sizeDelta / 2;
-        //Set anchored position of +5 or -10 gameobject to anchored position of character minus canvas offset
-        rectTransform.anchoredPosition = anchoredTransformPosition - offset;
+        //Set transform position of +5 or -10 gameobject to transform position of character
+        rectTransform.transform.position = transform.position;
         //Access the +5 or -10 gameobject image component
         Image image = gainOrLoss.GetComponent<Image>();
         //Enable the image

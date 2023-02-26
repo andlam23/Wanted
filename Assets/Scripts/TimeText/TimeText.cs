@@ -10,8 +10,8 @@ public class TimeText : MonoBehaviour
     private TextMeshProUGUI timeText;
     //Define starting time
     public static float time = 10;
-    //Define GameOver gameobject
-    private GameObject gameOver;
+    //Define specified gameobject
+    private GameObject specifiedGameObject;
     //Define whether the game is active
     public static bool isGameActive;
     void Start()
@@ -51,14 +51,21 @@ public class TimeText : MonoBehaviour
         //Destroy the right character
         Destroy(ClickFunctionality.rightCharacterGameObject);
         //GameOver image will appear
-        EnableGameOverImage();
+        EnableDisableImage("GameOver", true);
+        //Wait for 2.75 seconds
+        yield return new WaitForSeconds(2.75f);
+        //GameOver image will disappear
+        EnableDisableImage("GameOver", false);
+        //HighScore image will appear
+        EnableDisableImage("HighScore", true);
+
     }
-    private void EnableGameOverImage()
+    private void EnableDisableImage(string gameObjectName, bool trueOrFalse)
     {
         //Find the GameOver gameobject, access the image component, and enable it
-        gameOver = GameObject.Find("GameOver");
-        Image gameOverImage = gameOver.GetComponent<Image>();
-        gameOverImage.enabled = true;
+        specifiedGameObject = GameObject.Find(gameObjectName);
+        Image gameObjectImage = specifiedGameObject.GetComponent<Image>();
+            gameObjectImage.enabled = trueOrFalse;
     }
     private void UpdateTime()
     {
