@@ -10,6 +10,8 @@ public class ClickFunctionality : MonoBehaviour
     public static bool nextLevelBuffer;
     // define a bool for whether Right character was clicked
     public static bool isRightCharacterClicked;
+    // define the right character gameobject
+    public static GameObject rightCharacterGameObject;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && !isRightCharacterClicked && TimeText.isGameActive)
@@ -47,23 +49,32 @@ public class ClickFunctionality : MonoBehaviour
             }
         }
     }
-    // stores all characters in a var then destroys each of them
+    // Define coroutine to destroy characters, stop character movement, pause time countdown, and load the next level
     public IEnumerator DestroyCharactersAndPauseCountdownAndLoadLevel()
     {
+        // set "is Right Character clicked" to true
         isRightCharacterClicked = true;
         // set buffer for next level to true
         nextLevelBuffer = true;
-        //
-        yield return new WaitForSeconds(2);
-        //set buffer for next level to false
-        nextLevelBuffer = false;
-        //
+        // stores all characters in a var then destroys each of them if it is not the right character
         var characters = GameObject.FindGameObjectsWithTag("Character");
         foreach (var character in characters)
         {
+            if (character != rightCharacterGameObject)
             Destroy(character);
         }
+        // deactivate the right character's movement scripts
+        rightCharacterGameObject.GetComponent<CharacterMovement>().enabled = false;
+        rightCharacterGameObject.GetComponent<CharacterMovementBouncy>().enabled = false;
+        // wait for 2 seconds
+        yield return new WaitForSeconds(2);
+        // set buffer for next level to false
+        nextLevelBuffer = false;
+        // destroy the right character
+        Destroy(rightCharacterGameObject);
+        // load the next level
         LoadLevel();
+        // set "is Right Character clicked" to false
         isRightCharacterClicked = false;
     }
     protected void LoadLevel()

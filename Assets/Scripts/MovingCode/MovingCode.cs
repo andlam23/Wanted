@@ -66,6 +66,8 @@ public class MovingCode : NonMovingCode
         int rightCharacterGridIndex = DetermineCharacterGridIndex();
         Vector2 rightSpawnPosition = DetermineCharacterSpawnPosition(rightCharacterGridIndex);
         GameObject rightCharacter = (GameObject)Instantiate(characterPrefabs[rightCharacterIndex], rightSpawnPosition, Quaternion.identity);
+        //Setting right character gameobject to right character
+        ClickFunctionality.rightCharacterGameObject = rightCharacter;
         //Accessing the Right character's SetCharacterLayer script and setting isRightCharacter bool to true
         SetCharacterLayer rightCharacterSetCharacterLayer = rightCharacter.GetComponent<SetCharacterLayer>();
         rightCharacterSetCharacterLayer.isRightCharacter = true;
