@@ -56,9 +56,6 @@ public class TimeText : MonoBehaviour
         yield return new WaitForSeconds(2.75f);
         //GameOver image will disappear
         EnableDisableImage("GameOver", false);
-        //HighScore image will appear
-        EnableDisableImage("HighScore", true);
-
     }
     private void EnableDisableImage(string gameObjectName, bool trueOrFalse)
     {
